@@ -1,4 +1,5 @@
-import { ApolloServer, gql } from 'apollo-server'
+import express from 'express'
+import { ApolloServer, gql } from 'apollo-server-express'
 
 const typeDefs = gql`
   type Book {
@@ -9,7 +10,7 @@ const typeDefs = gql`
   type Query {
     books: [Book]
   }
-`;
+`
 
 const books = [
   {
@@ -20,16 +21,19 @@ const books = [
     title: 'Jurassic Park',
     author: 'Michael Crichton',
   },
-];
+]
 
 const resolvers = {
   Query: {
     books: () => books,
   },
-};
+}
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const server = new ApolloServer({ typeDefs, resolvers })
+const app = express();
 
-server.listen().then(({ url }) => {
-  console.log(`🚀 Server ready at ${url}`);
-});
+server.applyMiddleware({ app });
+
+app.listen({ port: 4000 }, () =>
+  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
+);
