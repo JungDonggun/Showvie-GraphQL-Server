@@ -1,0 +1,18 @@
+type User {
+  id: ID! @id
+  identity: String! @unique
+  name: String!
+  password: String! @encrypt
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+  movieReview: [MovieReview]
+}
+
+type MovieReview {
+  id: ID! @id
+  title: String!
+  rating: Int! @default(value: 0)
+  review: String
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}

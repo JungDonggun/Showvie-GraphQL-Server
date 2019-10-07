@@ -1,6 +1,0 @@
-endpoint: https://us1.prisma.sh/2k01dongkun-76b3d2/showvie-API-Server/dev
-datamodel: datamodel.prisma
-
-generate:
-  - generator: typescript-client
-    output: ./generated/prisma-client/
