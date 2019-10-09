@@ -1,18 +1,33 @@
-export const UserWithTypeDefs = `type User {
-  id: ID!
-  username: String!
-}`
+import { gql } from 'apollo-server'
 
-export const QueryWithTypeDefs = `type Query {
-  currentUser: User!
-}`
+export const typeDefs = gql`
+	type User {
+		id: ID!
+		identity: String!
+		name: String!
+		movieReviews: [MovieReview]
+	}
 
-export const MutationWithTypeDefs = `type Mutation {
-  register(username: String!, password: String!): User!
-  login(username: String!, password: String!): LoginResponse!
-}`
+	type MovieReview {
+		id: ID!
+		title: String!
+		rating: Int!
+		review: String
+	}
 
-export const LoginResponserWithTypeDefs = `type LoginResponse {
-  token: String
-  user: User
-}`
+	type Query {
+		currentUser: User!
+		test: User
+	}
+
+	type Mutation {
+		register(username: String!, password: String!): User!
+		login(username: String!, password: String!): LoginResponse!
+	}
+
+	type LoginResponse {
+		token: String
+		user: User
+	}
+`
+export default typeDefs
