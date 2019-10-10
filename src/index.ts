@@ -1,39 +1,29 @@
-import * as express from 'express'
-import { ApolloServer, gql } from 'apollo-server-express'
+import { ApolloServer } from 'apollo-server'
+// import { idArg, queryType, stringArg } from 'nexus'
+// import { makePrismaSchema, prismaObjectType } from 'nexus-prisma'
+import { verify } from 'jsonwebtoken'
+// import * as path from 'path'
+import resolvers from './graphql/resolvers'
+import typeDefs from './graphql/typeDefs'
+import { prisma } from '../prisma/generated/prisma-client'
 
-const typeDefs = gql`
-	type Book {
-		title: String
-		author: String
-	}
+// const getUser = (token) => {
+// 	try {
+// 		if (token) {
+// 			return verify(token, 'my-secret-from-env-file-in-prod')
+// 		}
+// 	} catch (err) {
+// 		console.log('getUser function Error', err)
+// 		return null
+// 	}
+// }
 
-	type Query {
-		books: [Book]
-	}
-`
+const server = new ApolloServer({
+	typeDefs,
+	resolvers,
+	context: { db: prisma }
+})
 
-const books = [
-	{
-		title: 'Harry Potter and the Chamber of Secrets',
-		author: 'J.K. Rowling'
-	},
-	{
-		title: 'Jurassic Park',
-		author: 'Michael Crichton'
-	}
-]
-
-const resolvers = {
-	Query: {
-		books: () => books
-	}
-}
-
-const server = new ApolloServer({ typeDefs, resolvers })
-const app = express()
-
-server.applyMiddleware({ app })
-
-app.listen({ port: 4000 }, () =>
-	console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`)
-)
+server.listen().then(({ url }) => {
+	console.log(`🚀 Server ready at ${url}`)
+})

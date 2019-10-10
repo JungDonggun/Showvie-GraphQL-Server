@@ -346,7 +346,7 @@ type User {
   password: String!
   createdAt: DateTime!
   updatedAt: DateTime!
-  movieReview(where: MovieReviewWhereInput, orderBy: MovieReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MovieReview!]
+  movieReviews(where: MovieReviewWhereInput, orderBy: MovieReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MovieReview!]
 }
 
 type UserConnection {
@@ -360,7 +360,7 @@ input UserCreateInput {
   identity: String!
   name: String!
   password: String!
-  movieReview: MovieReviewCreateManyInput
+  movieReviews: MovieReviewCreateManyInput
 }
 
 type UserEdge {
@@ -414,7 +414,7 @@ input UserUpdateInput {
   identity: String
   name: String
   password: String
-  movieReview: MovieReviewUpdateManyInput
+  movieReviews: MovieReviewUpdateManyInput
 }
 
 input UserUpdateManyMutationInput {
@@ -496,9 +496,9 @@ input UserWhereInput {
   updatedAt_lte: DateTime
   updatedAt_gt: DateTime
   updatedAt_gte: DateTime
-  movieReview_every: MovieReviewWhereInput
-  movieReview_some: MovieReviewWhereInput
-  movieReview_none: MovieReviewWhereInput
+  movieReviews_every: MovieReviewWhereInput
+  movieReviews_some: MovieReviewWhereInput
+  movieReviews_none: MovieReviewWhereInput
   AND: [UserWhereInput!]
   OR: [UserWhereInput!]
   NOT: [UserWhereInput!]

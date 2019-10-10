@@ -5,7 +5,7 @@ type User {
   password: String! @encrypt
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
-  movieReview: [MovieReview]
+  movieReviews: [MovieReview]
 }
 
 type MovieReview {

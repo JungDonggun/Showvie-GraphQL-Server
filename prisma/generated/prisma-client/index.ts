@@ -195,7 +195,7 @@ export interface UserCreateInput {
   identity: String;
   name: String;
   password: String;
-  movieReview?: Maybe<MovieReviewCreateManyInput>;
+  movieReviews?: Maybe<MovieReviewCreateManyInput>;
 }
 
 export interface MovieReviewUpdateWithWhereUniqueNestedInput {
@@ -255,7 +255,7 @@ export interface UserUpdateInput {
   identity?: Maybe<String>;
   name?: Maybe<String>;
   password?: Maybe<String>;
-  movieReview?: Maybe<MovieReviewUpdateManyInput>;
+  movieReviews?: Maybe<MovieReviewUpdateManyInput>;
 }
 
 export interface MovieReviewScalarWhereInput {
@@ -493,9 +493,9 @@ export interface UserWhereInput {
   updatedAt_lte?: Maybe<DateTimeInput>;
   updatedAt_gt?: Maybe<DateTimeInput>;
   updatedAt_gte?: Maybe<DateTimeInput>;
-  movieReview_every?: Maybe<MovieReviewWhereInput>;
-  movieReview_some?: Maybe<MovieReviewWhereInput>;
-  movieReview_none?: Maybe<MovieReviewWhereInput>;
+  movieReviews_every?: Maybe<MovieReviewWhereInput>;
+  movieReviews_some?: Maybe<MovieReviewWhereInput>;
+  movieReviews_none?: Maybe<MovieReviewWhereInput>;
   AND?: Maybe<UserWhereInput[] | UserWhereInput>;
   OR?: Maybe<UserWhereInput[] | UserWhereInput>;
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
@@ -830,7 +830,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   password: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
-  movieReview: <T = FragmentableArray<MovieReview>>(args?: {
+  movieReviews: <T = FragmentableArray<MovieReview>>(args?: {
     where?: MovieReviewWhereInput;
     orderBy?: MovieReviewOrderByInput;
     skip?: Int;
@@ -850,7 +850,7 @@ export interface UserSubscription
   password: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  movieReview: <T = Promise<AsyncIterator<MovieReviewSubscription>>>(args?: {
+  movieReviews: <T = Promise<AsyncIterator<MovieReviewSubscription>>>(args?: {
     where?: MovieReviewWhereInput;
     orderBy?: MovieReviewOrderByInput;
     skip?: Int;
@@ -870,7 +870,7 @@ export interface UserNullablePromise
   password: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
-  movieReview: <T = FragmentableArray<MovieReview>>(args?: {
+  movieReviews: <T = FragmentableArray<MovieReview>>(args?: {
     where?: MovieReviewWhereInput;
     orderBy?: MovieReviewOrderByInput;
     skip?: Int;

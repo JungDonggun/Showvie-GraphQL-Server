@@ -1,23 +1,26 @@
 import { gql } from 'apollo-server'
 
 export const typeDefs = gql`
-	type User {
-		id: ID!
-		identity: String!
-		name: String!
-		movieReviews: [MovieReview]
-	}
-
 	type MovieReview {
-		id: ID!
 		title: String!
 		rating: Int!
 		review: String
 	}
 
+	type MovieList {
+		id: String!
+		title: String!
+	}
+
+	type User {
+		identity: String!
+		name: String!
+		movieReviews: [MovieReview]
+	}
+
 	type Query {
-		currentUser: User!
-		test: User
+		userData: User
+		movieList: [MovieList]
 	}
 
 	type Mutation {
