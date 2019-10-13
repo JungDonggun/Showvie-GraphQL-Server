@@ -1,27 +1,34 @@
 import { ApolloServer } from 'apollo-server'
-// import { idArg, queryType, stringArg } from 'nexus'
-// import { makePrismaSchema, prismaObjectType } from 'nexus-prisma'
 import { verify } from 'jsonwebtoken'
-// import * as path from 'path'
 import resolvers from './graphql/resolvers'
 import typeDefs from './graphql/typeDefs'
 import { prisma } from '../prisma/generated/prisma-client'
+import { get } from 'config'
 
-// const getUser = (token) => {
-// 	try {
-// 		if (token) {
-// 			return verify(token, 'my-secret-from-env-file-in-prod')
-// 		}
-// 	} catch (err) {
-// 		console.log('getUser function Error', err)
-// 		return null
-// 	}
-// }
+const getUser = (token) => {
+	try {
+		const secret = get('Customer.secret.privateKey')
+
+		console.log('data in paramter =>', token)
+		console.log('my secret token =>', secret)
+
+		return token && verify(token, secret)
+	} catch (err) {
+		console.log(`getUser Function Error => ${err.message}`)
+		return null
+	}
+}
 
 const server = new ApolloServer({
 	typeDefs,
 	resolvers,
-	context: { db: prisma }
+	context: ({ req }) => {
+		const tokenWithBearer = req.headers.authorization || ''
+		const token = tokenWithBearer.split(' ')[1]
+		const user = getUser(token)
+
+		return { user, prisma }
+	}
 })
 
 server.listen().then(({ url }) => {

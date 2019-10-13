@@ -1,5 +1,6 @@
 import { hash, compare } from 'bcryptjs'
 import { sign } from 'jsonwebtoken'
+import { get } from 'config'
 
 // Resolver란, query에서 특정 필드에 대한 요청이 있을 때, 그것을 어떤 로직으로 처리할지 GraphQL에게 알려주는 역할을 합니다.
 const resolvers = {
@@ -54,12 +55,16 @@ const resolvers = {
 				throw new Error('Invalid Login')
 			}
 
+			const secret = get('Customer.secret.privateKey')
+
+			console.log('my Secret private key => ', secret)
+
 			const token = sign(
 				{
 					identity: user.identity,
 					nickname: user.nickname
 				},
-				'showvie-secret-from-env-file-in-prod',
+				secret,
 				{
 					expires: '1m'
 				}
