@@ -24,8 +24,8 @@ export const typeDefs = gql`
 	}
 
 	type Mutation {
-		register(username: String!, password: String!): User!
-		login(username: String!, password: String!): LoginResponse!
+		register(nickname: String!, identity: String!, password: String!): User!
+		login(identity: String!, password: String!): LoginResponse!
 	}
 
 	type LoginResponse {
