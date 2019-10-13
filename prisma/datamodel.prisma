@@ -16,3 +16,16 @@ type MovieReview {
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
+
+type Movies {
+  id: ID! @id
+  movieNm: String!
+  movieNmEn: String!
+  prdtYear: String!
+  openDt: String!
+  prdtStatNm: String!
+  nationAlt: String!
+  genreAlt: String!
+  repNationNm: String!
+  directors: String!
+}

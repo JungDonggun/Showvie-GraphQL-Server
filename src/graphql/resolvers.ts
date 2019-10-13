@@ -13,7 +13,7 @@ const resolvers = {
 					{
 						title: 'The Hunger Games Mockingjay Part 2',
 						rating: 3,
-						review: '재밌어요'
+						review: 'is funny'
 					}
 				]
 			}
@@ -39,9 +39,6 @@ const resolvers = {
 				identity,
 				password: hashedPassword
 			})
-
-			console.log(nickname, identity, password)
-			console.log('user -_-', user)
 
 			return user
 		},

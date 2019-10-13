@@ -6,6 +6,10 @@ export const typeDefs = /* GraphQL */ `type AggregateMovieReview {
   count: Int!
 }
 
+type AggregateMovies {
+  count: Int!
+}
+
 type AggregateUser {
   count: Int!
 }
@@ -292,6 +296,271 @@ input MovieReviewWhereUniqueInput {
   id: ID
 }
 
+type Movies {
+  id: ID!
+  movieNm: String!
+  movieNmEn: String!
+  prdtYear: String!
+  openDt: String!
+  prdtStatNm: String!
+  nationAlt: String!
+  genreAlt: String!
+  repNationNm: String!
+  directors: String!
+}
+
+type MoviesConnection {
+  pageInfo: PageInfo!
+  edges: [MoviesEdge]!
+  aggregate: AggregateMovies!
+}
+
+input MoviesCreateInput {
+  id: ID
+  movieNm: String!
+  movieNmEn: String!
+  prdtYear: String!
+  openDt: String!
+  prdtStatNm: String!
+  nationAlt: String!
+  genreAlt: String!
+  repNationNm: String!
+  directors: String!
+}
+
+type MoviesEdge {
+  node: Movies!
+  cursor: String!
+}
+
+enum MoviesOrderByInput {
+  id_ASC
+  id_DESC
+  movieNm_ASC
+  movieNm_DESC
+  movieNmEn_ASC
+  movieNmEn_DESC
+  prdtYear_ASC
+  prdtYear_DESC
+  openDt_ASC
+  openDt_DESC
+  prdtStatNm_ASC
+  prdtStatNm_DESC
+  nationAlt_ASC
+  nationAlt_DESC
+  genreAlt_ASC
+  genreAlt_DESC
+  repNationNm_ASC
+  repNationNm_DESC
+  directors_ASC
+  directors_DESC
+}
+
+type MoviesPreviousValues {
+  id: ID!
+  movieNm: String!
+  movieNmEn: String!
+  prdtYear: String!
+  openDt: String!
+  prdtStatNm: String!
+  nationAlt: String!
+  genreAlt: String!
+  repNationNm: String!
+  directors: String!
+}
+
+type MoviesSubscriptionPayload {
+  mutation: MutationType!
+  node: Movies
+  updatedFields: [String!]
+  previousValues: MoviesPreviousValues
+}
+
+input MoviesSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: MoviesWhereInput
+  AND: [MoviesSubscriptionWhereInput!]
+  OR: [MoviesSubscriptionWhereInput!]
+  NOT: [MoviesSubscriptionWhereInput!]
+}
+
+input MoviesUpdateInput {
+  movieNm: String
+  movieNmEn: String
+  prdtYear: String
+  openDt: String
+  prdtStatNm: String
+  nationAlt: String
+  genreAlt: String
+  repNationNm: String
+  directors: String
+}
+
+input MoviesUpdateManyMutationInput {
+  movieNm: String
+  movieNmEn: String
+  prdtYear: String
+  openDt: String
+  prdtStatNm: String
+  nationAlt: String
+  genreAlt: String
+  repNationNm: String
+  directors: String
+}
+
+input MoviesWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  movieNm: String
+  movieNm_not: String
+  movieNm_in: [String!]
+  movieNm_not_in: [String!]
+  movieNm_lt: String
+  movieNm_lte: String
+  movieNm_gt: String
+  movieNm_gte: String
+  movieNm_contains: String
+  movieNm_not_contains: String
+  movieNm_starts_with: String
+  movieNm_not_starts_with: String
+  movieNm_ends_with: String
+  movieNm_not_ends_with: String
+  movieNmEn: String
+  movieNmEn_not: String
+  movieNmEn_in: [String!]
+  movieNmEn_not_in: [String!]
+  movieNmEn_lt: String
+  movieNmEn_lte: String
+  movieNmEn_gt: String
+  movieNmEn_gte: String
+  movieNmEn_contains: String
+  movieNmEn_not_contains: String
+  movieNmEn_starts_with: String
+  movieNmEn_not_starts_with: String
+  movieNmEn_ends_with: String
+  movieNmEn_not_ends_with: String
+  prdtYear: String
+  prdtYear_not: String
+  prdtYear_in: [String!]
+  prdtYear_not_in: [String!]
+  prdtYear_lt: String
+  prdtYear_lte: String
+  prdtYear_gt: String
+  prdtYear_gte: String
+  prdtYear_contains: String
+  prdtYear_not_contains: String
+  prdtYear_starts_with: String
+  prdtYear_not_starts_with: String
+  prdtYear_ends_with: String
+  prdtYear_not_ends_with: String
+  openDt: String
+  openDt_not: String
+  openDt_in: [String!]
+  openDt_not_in: [String!]
+  openDt_lt: String
+  openDt_lte: String
+  openDt_gt: String
+  openDt_gte: String
+  openDt_contains: String
+  openDt_not_contains: String
+  openDt_starts_with: String
+  openDt_not_starts_with: String
+  openDt_ends_with: String
+  openDt_not_ends_with: String
+  prdtStatNm: String
+  prdtStatNm_not: String
+  prdtStatNm_in: [String!]
+  prdtStatNm_not_in: [String!]
+  prdtStatNm_lt: String
+  prdtStatNm_lte: String
+  prdtStatNm_gt: String
+  prdtStatNm_gte: String
+  prdtStatNm_contains: String
+  prdtStatNm_not_contains: String
+  prdtStatNm_starts_with: String
+  prdtStatNm_not_starts_with: String
+  prdtStatNm_ends_with: String
+  prdtStatNm_not_ends_with: String
+  nationAlt: String
+  nationAlt_not: String
+  nationAlt_in: [String!]
+  nationAlt_not_in: [String!]
+  nationAlt_lt: String
+  nationAlt_lte: String
+  nationAlt_gt: String
+  nationAlt_gte: String
+  nationAlt_contains: String
+  nationAlt_not_contains: String
+  nationAlt_starts_with: String
+  nationAlt_not_starts_with: String
+  nationAlt_ends_with: String
+  nationAlt_not_ends_with: String
+  genreAlt: String
+  genreAlt_not: String
+  genreAlt_in: [String!]
+  genreAlt_not_in: [String!]
+  genreAlt_lt: String
+  genreAlt_lte: String
+  genreAlt_gt: String
+  genreAlt_gte: String
+  genreAlt_contains: String
+  genreAlt_not_contains: String
+  genreAlt_starts_with: String
+  genreAlt_not_starts_with: String
+  genreAlt_ends_with: String
+  genreAlt_not_ends_with: String
+  repNationNm: String
+  repNationNm_not: String
+  repNationNm_in: [String!]
+  repNationNm_not_in: [String!]
+  repNationNm_lt: String
+  repNationNm_lte: String
+  repNationNm_gt: String
+  repNationNm_gte: String
+  repNationNm_contains: String
+  repNationNm_not_contains: String
+  repNationNm_starts_with: String
+  repNationNm_not_starts_with: String
+  repNationNm_ends_with: String
+  repNationNm_not_ends_with: String
+  directors: String
+  directors_not: String
+  directors_in: [String!]
+  directors_not_in: [String!]
+  directors_lt: String
+  directors_lte: String
+  directors_gt: String
+  directors_gte: String
+  directors_contains: String
+  directors_not_contains: String
+  directors_starts_with: String
+  directors_not_starts_with: String
+  directors_ends_with: String
+  directors_not_ends_with: String
+  AND: [MoviesWhereInput!]
+  OR: [MoviesWhereInput!]
+  NOT: [MoviesWhereInput!]
+}
+
+input MoviesWhereUniqueInput {
+  id: ID
+}
+
 type Mutation {
   createMovieReview(data: MovieReviewCreateInput!): MovieReview!
   updateMovieReview(data: MovieReviewUpdateInput!, where: MovieReviewWhereUniqueInput!): MovieReview
@@ -299,6 +568,12 @@ type Mutation {
   upsertMovieReview(where: MovieReviewWhereUniqueInput!, create: MovieReviewCreateInput!, update: MovieReviewUpdateInput!): MovieReview!
   deleteMovieReview(where: MovieReviewWhereUniqueInput!): MovieReview
   deleteManyMovieReviews(where: MovieReviewWhereInput): BatchPayload!
+  createMovies(data: MoviesCreateInput!): Movies!
+  updateMovies(data: MoviesUpdateInput!, where: MoviesWhereUniqueInput!): Movies
+  updateManyMovieses(data: MoviesUpdateManyMutationInput!, where: MoviesWhereInput): BatchPayload!
+  upsertMovies(where: MoviesWhereUniqueInput!, create: MoviesCreateInput!, update: MoviesUpdateInput!): Movies!
+  deleteMovies(where: MoviesWhereUniqueInput!): Movies
+  deleteManyMovieses(where: MoviesWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
@@ -328,6 +603,9 @@ type Query {
   movieReview(where: MovieReviewWhereUniqueInput!): MovieReview
   movieReviews(where: MovieReviewWhereInput, orderBy: MovieReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [MovieReview]!
   movieReviewsConnection(where: MovieReviewWhereInput, orderBy: MovieReviewOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MovieReviewConnection!
+  movies(where: MoviesWhereUniqueInput!): Movies
+  movieses(where: MoviesWhereInput, orderBy: MoviesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Movies]!
+  moviesesConnection(where: MoviesWhereInput, orderBy: MoviesOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): MoviesConnection!
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
@@ -336,6 +614,7 @@ type Query {
 
 type Subscription {
   movieReview(where: MovieReviewSubscriptionWhereInput): MovieReviewSubscriptionPayload
+  movies(where: MoviesSubscriptionWhereInput): MoviesSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
 }
 

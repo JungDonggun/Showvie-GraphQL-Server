@@ -17,6 +17,7 @@ export type Maybe<T> = T | undefined | null;
 
 export interface Exists {
   movieReview: (where?: MovieReviewWhereInput) => Promise<boolean>;
+  movies: (where?: MoviesWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -60,6 +61,25 @@ export interface Prisma {
     first?: Int;
     last?: Int;
   }) => MovieReviewConnectionPromise;
+  movies: (where: MoviesWhereUniqueInput) => MoviesNullablePromise;
+  movieses: (args?: {
+    where?: MoviesWhereInput;
+    orderBy?: MoviesOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => FragmentableArray<Movies>;
+  moviesesConnection: (args?: {
+    where?: MoviesWhereInput;
+    orderBy?: MoviesOrderByInput;
+    skip?: Int;
+    after?: String;
+    before?: String;
+    first?: Int;
+    last?: Int;
+  }) => MoviesConnectionPromise;
   user: (where: UserWhereUniqueInput) => UserNullablePromise;
   users: (args?: {
     where?: UserWhereInput;
@@ -103,6 +123,22 @@ export interface Prisma {
   deleteManyMovieReviews: (
     where?: MovieReviewWhereInput
   ) => BatchPayloadPromise;
+  createMovies: (data: MoviesCreateInput) => MoviesPromise;
+  updateMovies: (args: {
+    data: MoviesUpdateInput;
+    where: MoviesWhereUniqueInput;
+  }) => MoviesPromise;
+  updateManyMovieses: (args: {
+    data: MoviesUpdateManyMutationInput;
+    where?: MoviesWhereInput;
+  }) => BatchPayloadPromise;
+  upsertMovies: (args: {
+    where: MoviesWhereUniqueInput;
+    create: MoviesCreateInput;
+    update: MoviesUpdateInput;
+  }) => MoviesPromise;
+  deleteMovies: (where: MoviesWhereUniqueInput) => MoviesPromise;
+  deleteManyMovieses: (where?: MoviesWhereInput) => BatchPayloadPromise;
   createUser: (data: UserCreateInput) => UserPromise;
   updateUser: (args: {
     data: UserUpdateInput;
@@ -131,6 +167,9 @@ export interface Subscription {
   movieReview: (
     where?: MovieReviewSubscriptionWhereInput
   ) => MovieReviewSubscriptionPayloadSubscription;
+  movies: (
+    where?: MoviesSubscriptionWhereInput
+  ) => MoviesSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -158,6 +197,28 @@ export type MovieReviewOrderByInput =
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
+export type MoviesOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "movieNm_ASC"
+  | "movieNm_DESC"
+  | "movieNmEn_ASC"
+  | "movieNmEn_DESC"
+  | "prdtYear_ASC"
+  | "prdtYear_DESC"
+  | "openDt_ASC"
+  | "openDt_DESC"
+  | "prdtStatNm_ASC"
+  | "prdtStatNm_DESC"
+  | "nationAlt_ASC"
+  | "nationAlt_DESC"
+  | "genreAlt_ASC"
+  | "genreAlt_DESC"
+  | "repNationNm_ASC"
+  | "repNationNm_DESC"
+  | "directors_ASC"
+  | "directors_DESC";
+
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
@@ -174,8 +235,9 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface MovieReviewUpdateInput {
-  title?: Maybe<String>;
+export interface MovieReviewCreateInput {
+  id?: Maybe<ID_Input>;
+  title: String;
   rating?: Maybe<Int>;
   review?: Maybe<String>;
 }
@@ -184,151 +246,28 @@ export type MovieReviewWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
 }>;
 
-export interface MovieReviewUpdateDataInput {
-  title?: Maybe<String>;
-  rating?: Maybe<Int>;
-  review?: Maybe<String>;
-}
-
-export interface UserCreateInput {
-  id?: Maybe<ID_Input>;
-  identity: String;
-  nickname: String;
-  password: String;
-  movieReviews?: Maybe<MovieReviewCreateManyInput>;
-}
-
 export interface MovieReviewUpdateWithWhereUniqueNestedInput {
   where: MovieReviewWhereUniqueInput;
   data: MovieReviewUpdateDataInput;
 }
 
-export interface MovieReviewSubscriptionWhereInput {
-  mutation_in?: Maybe<MutationType[] | MutationType>;
-  updatedFields_contains?: Maybe<String>;
-  updatedFields_contains_every?: Maybe<String[] | String>;
-  updatedFields_contains_some?: Maybe<String[] | String>;
-  node?: Maybe<MovieReviewWhereInput>;
-  AND?: Maybe<
-    MovieReviewSubscriptionWhereInput[] | MovieReviewSubscriptionWhereInput
-  >;
-  OR?: Maybe<
-    MovieReviewSubscriptionWhereInput[] | MovieReviewSubscriptionWhereInput
-  >;
-  NOT?: Maybe<
-    MovieReviewSubscriptionWhereInput[] | MovieReviewSubscriptionWhereInput
-  >;
-}
-
-export interface MovieReviewUpdateManyInput {
-  create?: Maybe<MovieReviewCreateInput[] | MovieReviewCreateInput>;
-  update?: Maybe<
-    | MovieReviewUpdateWithWhereUniqueNestedInput[]
-    | MovieReviewUpdateWithWhereUniqueNestedInput
-  >;
-  upsert?: Maybe<
-    | MovieReviewUpsertWithWhereUniqueNestedInput[]
-    | MovieReviewUpsertWithWhereUniqueNestedInput
-  >;
-  delete?: Maybe<MovieReviewWhereUniqueInput[] | MovieReviewWhereUniqueInput>;
-  connect?: Maybe<MovieReviewWhereUniqueInput[] | MovieReviewWhereUniqueInput>;
-  set?: Maybe<MovieReviewWhereUniqueInput[] | MovieReviewWhereUniqueInput>;
-  disconnect?: Maybe<
-    MovieReviewWhereUniqueInput[] | MovieReviewWhereUniqueInput
-  >;
-  deleteMany?: Maybe<
-    MovieReviewScalarWhereInput[] | MovieReviewScalarWhereInput
-  >;
-  updateMany?: Maybe<
-    | MovieReviewUpdateManyWithWhereNestedInput[]
-    | MovieReviewUpdateManyWithWhereNestedInput
-  >;
-}
-
-export interface MovieReviewUpdateManyDataInput {
-  title?: Maybe<String>;
-  rating?: Maybe<Int>;
-  review?: Maybe<String>;
-}
-
-export interface UserUpdateInput {
-  identity?: Maybe<String>;
-  nickname?: Maybe<String>;
-  password?: Maybe<String>;
-  movieReviews?: Maybe<MovieReviewUpdateManyInput>;
-}
-
-export interface MovieReviewScalarWhereInput {
+export interface MoviesCreateInput {
   id?: Maybe<ID_Input>;
-  id_not?: Maybe<ID_Input>;
-  id_in?: Maybe<ID_Input[] | ID_Input>;
-  id_not_in?: Maybe<ID_Input[] | ID_Input>;
-  id_lt?: Maybe<ID_Input>;
-  id_lte?: Maybe<ID_Input>;
-  id_gt?: Maybe<ID_Input>;
-  id_gte?: Maybe<ID_Input>;
-  id_contains?: Maybe<ID_Input>;
-  id_not_contains?: Maybe<ID_Input>;
-  id_starts_with?: Maybe<ID_Input>;
-  id_not_starts_with?: Maybe<ID_Input>;
-  id_ends_with?: Maybe<ID_Input>;
-  id_not_ends_with?: Maybe<ID_Input>;
-  title?: Maybe<String>;
-  title_not?: Maybe<String>;
-  title_in?: Maybe<String[] | String>;
-  title_not_in?: Maybe<String[] | String>;
-  title_lt?: Maybe<String>;
-  title_lte?: Maybe<String>;
-  title_gt?: Maybe<String>;
-  title_gte?: Maybe<String>;
-  title_contains?: Maybe<String>;
-  title_not_contains?: Maybe<String>;
-  title_starts_with?: Maybe<String>;
-  title_not_starts_with?: Maybe<String>;
-  title_ends_with?: Maybe<String>;
-  title_not_ends_with?: Maybe<String>;
-  rating?: Maybe<Int>;
-  rating_not?: Maybe<Int>;
-  rating_in?: Maybe<Int[] | Int>;
-  rating_not_in?: Maybe<Int[] | Int>;
-  rating_lt?: Maybe<Int>;
-  rating_lte?: Maybe<Int>;
-  rating_gt?: Maybe<Int>;
-  rating_gte?: Maybe<Int>;
-  review?: Maybe<String>;
-  review_not?: Maybe<String>;
-  review_in?: Maybe<String[] | String>;
-  review_not_in?: Maybe<String[] | String>;
-  review_lt?: Maybe<String>;
-  review_lte?: Maybe<String>;
-  review_gt?: Maybe<String>;
-  review_gte?: Maybe<String>;
-  review_contains?: Maybe<String>;
-  review_not_contains?: Maybe<String>;
-  review_starts_with?: Maybe<String>;
-  review_not_starts_with?: Maybe<String>;
-  review_ends_with?: Maybe<String>;
-  review_not_ends_with?: Maybe<String>;
-  createdAt?: Maybe<DateTimeInput>;
-  createdAt_not?: Maybe<DateTimeInput>;
-  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  createdAt_lt?: Maybe<DateTimeInput>;
-  createdAt_lte?: Maybe<DateTimeInput>;
-  createdAt_gt?: Maybe<DateTimeInput>;
-  createdAt_gte?: Maybe<DateTimeInput>;
-  updatedAt?: Maybe<DateTimeInput>;
-  updatedAt_not?: Maybe<DateTimeInput>;
-  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
-  updatedAt_lt?: Maybe<DateTimeInput>;
-  updatedAt_lte?: Maybe<DateTimeInput>;
-  updatedAt_gt?: Maybe<DateTimeInput>;
-  updatedAt_gte?: Maybe<DateTimeInput>;
-  AND?: Maybe<MovieReviewScalarWhereInput[] | MovieReviewScalarWhereInput>;
-  OR?: Maybe<MovieReviewScalarWhereInput[] | MovieReviewScalarWhereInput>;
-  NOT?: Maybe<MovieReviewScalarWhereInput[] | MovieReviewScalarWhereInput>;
+  movieNm: String;
+  movieNmEn: String;
+  prdtYear: String;
+  openDt: String;
+  prdtStatNm: String;
+  nationAlt: String;
+  genreAlt: String;
+  repNationNm: String;
+  directors: String;
 }
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+  identity?: Maybe<String>;
+}>;
 
 export interface MovieReviewWhereInput {
   id?: Maybe<ID_Input>;
@@ -402,22 +341,40 @@ export interface MovieReviewWhereInput {
   NOT?: Maybe<MovieReviewWhereInput[] | MovieReviewWhereInput>;
 }
 
-export interface MovieReviewUpdateManyMutationInput {
-  title?: Maybe<String>;
-  rating?: Maybe<Int>;
-  review?: Maybe<String>;
-}
-
-export interface MovieReviewCreateManyInput {
+export interface MovieReviewUpdateManyInput {
   create?: Maybe<MovieReviewCreateInput[] | MovieReviewCreateInput>;
+  update?: Maybe<
+    | MovieReviewUpdateWithWhereUniqueNestedInput[]
+    | MovieReviewUpdateWithWhereUniqueNestedInput
+  >;
+  upsert?: Maybe<
+    | MovieReviewUpsertWithWhereUniqueNestedInput[]
+    | MovieReviewUpsertWithWhereUniqueNestedInput
+  >;
+  delete?: Maybe<MovieReviewWhereUniqueInput[] | MovieReviewWhereUniqueInput>;
   connect?: Maybe<MovieReviewWhereUniqueInput[] | MovieReviewWhereUniqueInput>;
+  set?: Maybe<MovieReviewWhereUniqueInput[] | MovieReviewWhereUniqueInput>;
+  disconnect?: Maybe<
+    MovieReviewWhereUniqueInput[] | MovieReviewWhereUniqueInput
+  >;
+  deleteMany?: Maybe<
+    MovieReviewScalarWhereInput[] | MovieReviewScalarWhereInput
+  >;
+  updateMany?: Maybe<
+    | MovieReviewUpdateManyWithWhereNestedInput[]
+    | MovieReviewUpdateManyWithWhereNestedInput
+  >;
 }
 
-export interface MovieReviewCreateInput {
-  id?: Maybe<ID_Input>;
-  title: String;
-  rating?: Maybe<Int>;
-  review?: Maybe<String>;
+export interface MoviesSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<MoviesWhereInput>;
+  AND?: Maybe<MoviesSubscriptionWhereInput[] | MoviesSubscriptionWhereInput>;
+  OR?: Maybe<MoviesSubscriptionWhereInput[] | MoviesSubscriptionWhereInput>;
+  NOT?: Maybe<MoviesSubscriptionWhereInput[] | MoviesSubscriptionWhereInput>;
 }
 
 export interface UserWhereInput {
@@ -501,20 +458,198 @@ export interface UserWhereInput {
   NOT?: Maybe<UserWhereInput[] | UserWhereInput>;
 }
 
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: Maybe<ID_Input>;
-  identity?: Maybe<String>;
-}>;
-
-export interface MovieReviewUpdateManyWithWhereNestedInput {
-  where: MovieReviewScalarWhereInput;
-  data: MovieReviewUpdateManyDataInput;
-}
-
 export interface UserUpdateManyMutationInput {
   identity?: Maybe<String>;
   nickname?: Maybe<String>;
   password?: Maybe<String>;
+}
+
+export interface UserUpdateInput {
+  identity?: Maybe<String>;
+  nickname?: Maybe<String>;
+  password?: Maybe<String>;
+  movieReviews?: Maybe<MovieReviewUpdateManyInput>;
+}
+
+export type MoviesWhereUniqueInput = AtLeastOne<{
+  id: Maybe<ID_Input>;
+}>;
+
+export interface MovieReviewCreateManyInput {
+  create?: Maybe<MovieReviewCreateInput[] | MovieReviewCreateInput>;
+  connect?: Maybe<MovieReviewWhereUniqueInput[] | MovieReviewWhereUniqueInput>;
+}
+
+export interface MoviesWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  movieNm?: Maybe<String>;
+  movieNm_not?: Maybe<String>;
+  movieNm_in?: Maybe<String[] | String>;
+  movieNm_not_in?: Maybe<String[] | String>;
+  movieNm_lt?: Maybe<String>;
+  movieNm_lte?: Maybe<String>;
+  movieNm_gt?: Maybe<String>;
+  movieNm_gte?: Maybe<String>;
+  movieNm_contains?: Maybe<String>;
+  movieNm_not_contains?: Maybe<String>;
+  movieNm_starts_with?: Maybe<String>;
+  movieNm_not_starts_with?: Maybe<String>;
+  movieNm_ends_with?: Maybe<String>;
+  movieNm_not_ends_with?: Maybe<String>;
+  movieNmEn?: Maybe<String>;
+  movieNmEn_not?: Maybe<String>;
+  movieNmEn_in?: Maybe<String[] | String>;
+  movieNmEn_not_in?: Maybe<String[] | String>;
+  movieNmEn_lt?: Maybe<String>;
+  movieNmEn_lte?: Maybe<String>;
+  movieNmEn_gt?: Maybe<String>;
+  movieNmEn_gte?: Maybe<String>;
+  movieNmEn_contains?: Maybe<String>;
+  movieNmEn_not_contains?: Maybe<String>;
+  movieNmEn_starts_with?: Maybe<String>;
+  movieNmEn_not_starts_with?: Maybe<String>;
+  movieNmEn_ends_with?: Maybe<String>;
+  movieNmEn_not_ends_with?: Maybe<String>;
+  prdtYear?: Maybe<String>;
+  prdtYear_not?: Maybe<String>;
+  prdtYear_in?: Maybe<String[] | String>;
+  prdtYear_not_in?: Maybe<String[] | String>;
+  prdtYear_lt?: Maybe<String>;
+  prdtYear_lte?: Maybe<String>;
+  prdtYear_gt?: Maybe<String>;
+  prdtYear_gte?: Maybe<String>;
+  prdtYear_contains?: Maybe<String>;
+  prdtYear_not_contains?: Maybe<String>;
+  prdtYear_starts_with?: Maybe<String>;
+  prdtYear_not_starts_with?: Maybe<String>;
+  prdtYear_ends_with?: Maybe<String>;
+  prdtYear_not_ends_with?: Maybe<String>;
+  openDt?: Maybe<String>;
+  openDt_not?: Maybe<String>;
+  openDt_in?: Maybe<String[] | String>;
+  openDt_not_in?: Maybe<String[] | String>;
+  openDt_lt?: Maybe<String>;
+  openDt_lte?: Maybe<String>;
+  openDt_gt?: Maybe<String>;
+  openDt_gte?: Maybe<String>;
+  openDt_contains?: Maybe<String>;
+  openDt_not_contains?: Maybe<String>;
+  openDt_starts_with?: Maybe<String>;
+  openDt_not_starts_with?: Maybe<String>;
+  openDt_ends_with?: Maybe<String>;
+  openDt_not_ends_with?: Maybe<String>;
+  prdtStatNm?: Maybe<String>;
+  prdtStatNm_not?: Maybe<String>;
+  prdtStatNm_in?: Maybe<String[] | String>;
+  prdtStatNm_not_in?: Maybe<String[] | String>;
+  prdtStatNm_lt?: Maybe<String>;
+  prdtStatNm_lte?: Maybe<String>;
+  prdtStatNm_gt?: Maybe<String>;
+  prdtStatNm_gte?: Maybe<String>;
+  prdtStatNm_contains?: Maybe<String>;
+  prdtStatNm_not_contains?: Maybe<String>;
+  prdtStatNm_starts_with?: Maybe<String>;
+  prdtStatNm_not_starts_with?: Maybe<String>;
+  prdtStatNm_ends_with?: Maybe<String>;
+  prdtStatNm_not_ends_with?: Maybe<String>;
+  nationAlt?: Maybe<String>;
+  nationAlt_not?: Maybe<String>;
+  nationAlt_in?: Maybe<String[] | String>;
+  nationAlt_not_in?: Maybe<String[] | String>;
+  nationAlt_lt?: Maybe<String>;
+  nationAlt_lte?: Maybe<String>;
+  nationAlt_gt?: Maybe<String>;
+  nationAlt_gte?: Maybe<String>;
+  nationAlt_contains?: Maybe<String>;
+  nationAlt_not_contains?: Maybe<String>;
+  nationAlt_starts_with?: Maybe<String>;
+  nationAlt_not_starts_with?: Maybe<String>;
+  nationAlt_ends_with?: Maybe<String>;
+  nationAlt_not_ends_with?: Maybe<String>;
+  genreAlt?: Maybe<String>;
+  genreAlt_not?: Maybe<String>;
+  genreAlt_in?: Maybe<String[] | String>;
+  genreAlt_not_in?: Maybe<String[] | String>;
+  genreAlt_lt?: Maybe<String>;
+  genreAlt_lte?: Maybe<String>;
+  genreAlt_gt?: Maybe<String>;
+  genreAlt_gte?: Maybe<String>;
+  genreAlt_contains?: Maybe<String>;
+  genreAlt_not_contains?: Maybe<String>;
+  genreAlt_starts_with?: Maybe<String>;
+  genreAlt_not_starts_with?: Maybe<String>;
+  genreAlt_ends_with?: Maybe<String>;
+  genreAlt_not_ends_with?: Maybe<String>;
+  repNationNm?: Maybe<String>;
+  repNationNm_not?: Maybe<String>;
+  repNationNm_in?: Maybe<String[] | String>;
+  repNationNm_not_in?: Maybe<String[] | String>;
+  repNationNm_lt?: Maybe<String>;
+  repNationNm_lte?: Maybe<String>;
+  repNationNm_gt?: Maybe<String>;
+  repNationNm_gte?: Maybe<String>;
+  repNationNm_contains?: Maybe<String>;
+  repNationNm_not_contains?: Maybe<String>;
+  repNationNm_starts_with?: Maybe<String>;
+  repNationNm_not_starts_with?: Maybe<String>;
+  repNationNm_ends_with?: Maybe<String>;
+  repNationNm_not_ends_with?: Maybe<String>;
+  directors?: Maybe<String>;
+  directors_not?: Maybe<String>;
+  directors_in?: Maybe<String[] | String>;
+  directors_not_in?: Maybe<String[] | String>;
+  directors_lt?: Maybe<String>;
+  directors_lte?: Maybe<String>;
+  directors_gt?: Maybe<String>;
+  directors_gte?: Maybe<String>;
+  directors_contains?: Maybe<String>;
+  directors_not_contains?: Maybe<String>;
+  directors_starts_with?: Maybe<String>;
+  directors_not_starts_with?: Maybe<String>;
+  directors_ends_with?: Maybe<String>;
+  directors_not_ends_with?: Maybe<String>;
+  AND?: Maybe<MoviesWhereInput[] | MoviesWhereInput>;
+  OR?: Maybe<MoviesWhereInput[] | MoviesWhereInput>;
+  NOT?: Maybe<MoviesWhereInput[] | MoviesWhereInput>;
+}
+
+export interface UserCreateInput {
+  id?: Maybe<ID_Input>;
+  identity: String;
+  nickname: String;
+  password: String;
+  movieReviews?: Maybe<MovieReviewCreateManyInput>;
+}
+
+export interface MovieReviewUpsertWithWhereUniqueNestedInput {
+  where: MovieReviewWhereUniqueInput;
+  update: MovieReviewUpdateDataInput;
+  create: MovieReviewCreateInput;
+}
+
+export interface MoviesUpdateManyMutationInput {
+  movieNm?: Maybe<String>;
+  movieNmEn?: Maybe<String>;
+  prdtYear?: Maybe<String>;
+  openDt?: Maybe<String>;
+  prdtStatNm?: Maybe<String>;
+  nationAlt?: Maybe<String>;
+  genreAlt?: Maybe<String>;
+  repNationNm?: Maybe<String>;
+  directors?: Maybe<String>;
 }
 
 export interface UserSubscriptionWhereInput {
@@ -528,10 +663,134 @@ export interface UserSubscriptionWhereInput {
   NOT?: Maybe<UserSubscriptionWhereInput[] | UserSubscriptionWhereInput>;
 }
 
-export interface MovieReviewUpsertWithWhereUniqueNestedInput {
-  where: MovieReviewWhereUniqueInput;
-  update: MovieReviewUpdateDataInput;
-  create: MovieReviewCreateInput;
+export interface MovieReviewUpdateManyDataInput {
+  title?: Maybe<String>;
+  rating?: Maybe<Int>;
+  review?: Maybe<String>;
+}
+
+export interface MovieReviewUpdateManyMutationInput {
+  title?: Maybe<String>;
+  rating?: Maybe<Int>;
+  review?: Maybe<String>;
+}
+
+export interface MovieReviewUpdateInput {
+  title?: Maybe<String>;
+  rating?: Maybe<Int>;
+  review?: Maybe<String>;
+}
+
+export interface MoviesUpdateInput {
+  movieNm?: Maybe<String>;
+  movieNmEn?: Maybe<String>;
+  prdtYear?: Maybe<String>;
+  openDt?: Maybe<String>;
+  prdtStatNm?: Maybe<String>;
+  nationAlt?: Maybe<String>;
+  genreAlt?: Maybe<String>;
+  repNationNm?: Maybe<String>;
+  directors?: Maybe<String>;
+}
+
+export interface MovieReviewUpdateManyWithWhereNestedInput {
+  where: MovieReviewScalarWhereInput;
+  data: MovieReviewUpdateManyDataInput;
+}
+
+export interface MovieReviewSubscriptionWhereInput {
+  mutation_in?: Maybe<MutationType[] | MutationType>;
+  updatedFields_contains?: Maybe<String>;
+  updatedFields_contains_every?: Maybe<String[] | String>;
+  updatedFields_contains_some?: Maybe<String[] | String>;
+  node?: Maybe<MovieReviewWhereInput>;
+  AND?: Maybe<
+    MovieReviewSubscriptionWhereInput[] | MovieReviewSubscriptionWhereInput
+  >;
+  OR?: Maybe<
+    MovieReviewSubscriptionWhereInput[] | MovieReviewSubscriptionWhereInput
+  >;
+  NOT?: Maybe<
+    MovieReviewSubscriptionWhereInput[] | MovieReviewSubscriptionWhereInput
+  >;
+}
+
+export interface MovieReviewUpdateDataInput {
+  title?: Maybe<String>;
+  rating?: Maybe<Int>;
+  review?: Maybe<String>;
+}
+
+export interface MovieReviewScalarWhereInput {
+  id?: Maybe<ID_Input>;
+  id_not?: Maybe<ID_Input>;
+  id_in?: Maybe<ID_Input[] | ID_Input>;
+  id_not_in?: Maybe<ID_Input[] | ID_Input>;
+  id_lt?: Maybe<ID_Input>;
+  id_lte?: Maybe<ID_Input>;
+  id_gt?: Maybe<ID_Input>;
+  id_gte?: Maybe<ID_Input>;
+  id_contains?: Maybe<ID_Input>;
+  id_not_contains?: Maybe<ID_Input>;
+  id_starts_with?: Maybe<ID_Input>;
+  id_not_starts_with?: Maybe<ID_Input>;
+  id_ends_with?: Maybe<ID_Input>;
+  id_not_ends_with?: Maybe<ID_Input>;
+  title?: Maybe<String>;
+  title_not?: Maybe<String>;
+  title_in?: Maybe<String[] | String>;
+  title_not_in?: Maybe<String[] | String>;
+  title_lt?: Maybe<String>;
+  title_lte?: Maybe<String>;
+  title_gt?: Maybe<String>;
+  title_gte?: Maybe<String>;
+  title_contains?: Maybe<String>;
+  title_not_contains?: Maybe<String>;
+  title_starts_with?: Maybe<String>;
+  title_not_starts_with?: Maybe<String>;
+  title_ends_with?: Maybe<String>;
+  title_not_ends_with?: Maybe<String>;
+  rating?: Maybe<Int>;
+  rating_not?: Maybe<Int>;
+  rating_in?: Maybe<Int[] | Int>;
+  rating_not_in?: Maybe<Int[] | Int>;
+  rating_lt?: Maybe<Int>;
+  rating_lte?: Maybe<Int>;
+  rating_gt?: Maybe<Int>;
+  rating_gte?: Maybe<Int>;
+  review?: Maybe<String>;
+  review_not?: Maybe<String>;
+  review_in?: Maybe<String[] | String>;
+  review_not_in?: Maybe<String[] | String>;
+  review_lt?: Maybe<String>;
+  review_lte?: Maybe<String>;
+  review_gt?: Maybe<String>;
+  review_gte?: Maybe<String>;
+  review_contains?: Maybe<String>;
+  review_not_contains?: Maybe<String>;
+  review_starts_with?: Maybe<String>;
+  review_not_starts_with?: Maybe<String>;
+  review_ends_with?: Maybe<String>;
+  review_not_ends_with?: Maybe<String>;
+  createdAt?: Maybe<DateTimeInput>;
+  createdAt_not?: Maybe<DateTimeInput>;
+  createdAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  createdAt_lt?: Maybe<DateTimeInput>;
+  createdAt_lte?: Maybe<DateTimeInput>;
+  createdAt_gt?: Maybe<DateTimeInput>;
+  createdAt_gte?: Maybe<DateTimeInput>;
+  updatedAt?: Maybe<DateTimeInput>;
+  updatedAt_not?: Maybe<DateTimeInput>;
+  updatedAt_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_not_in?: Maybe<DateTimeInput[] | DateTimeInput>;
+  updatedAt_lt?: Maybe<DateTimeInput>;
+  updatedAt_lte?: Maybe<DateTimeInput>;
+  updatedAt_gt?: Maybe<DateTimeInput>;
+  updatedAt_gte?: Maybe<DateTimeInput>;
+  AND?: Maybe<MovieReviewScalarWhereInput[] | MovieReviewScalarWhereInput>;
+  OR?: Maybe<MovieReviewScalarWhereInput[] | MovieReviewScalarWhereInput>;
+  NOT?: Maybe<MovieReviewScalarWhereInput[] | MovieReviewScalarWhereInput>;
 }
 
 export interface NodeNode {
@@ -552,6 +811,62 @@ export interface BatchPayloadSubscription
   extends Promise<AsyncIterator<BatchPayload>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface Movies {
+  id: ID_Output;
+  movieNm: String;
+  movieNmEn: String;
+  prdtYear: String;
+  openDt: String;
+  prdtStatNm: String;
+  nationAlt: String;
+  genreAlt: String;
+  repNationNm: String;
+  directors: String;
+}
+
+export interface MoviesPromise extends Promise<Movies>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  movieNm: () => Promise<String>;
+  movieNmEn: () => Promise<String>;
+  prdtYear: () => Promise<String>;
+  openDt: () => Promise<String>;
+  prdtStatNm: () => Promise<String>;
+  nationAlt: () => Promise<String>;
+  genreAlt: () => Promise<String>;
+  repNationNm: () => Promise<String>;
+  directors: () => Promise<String>;
+}
+
+export interface MoviesSubscription
+  extends Promise<AsyncIterator<Movies>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  movieNm: () => Promise<AsyncIterator<String>>;
+  movieNmEn: () => Promise<AsyncIterator<String>>;
+  prdtYear: () => Promise<AsyncIterator<String>>;
+  openDt: () => Promise<AsyncIterator<String>>;
+  prdtStatNm: () => Promise<AsyncIterator<String>>;
+  nationAlt: () => Promise<AsyncIterator<String>>;
+  genreAlt: () => Promise<AsyncIterator<String>>;
+  repNationNm: () => Promise<AsyncIterator<String>>;
+  directors: () => Promise<AsyncIterator<String>>;
+}
+
+export interface MoviesNullablePromise
+  extends Promise<Movies | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  movieNm: () => Promise<String>;
+  movieNmEn: () => Promise<String>;
+  prdtYear: () => Promise<String>;
+  openDt: () => Promise<String>;
+  prdtStatNm: () => Promise<String>;
+  nationAlt: () => Promise<String>;
+  genreAlt: () => Promise<String>;
+  repNationNm: () => Promise<String>;
+  directors: () => Promise<String>;
 }
 
 export interface UserPreviousValues {
@@ -583,123 +898,6 @@ export interface UserPreviousValuesSubscription
   password: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface AggregateMovieReview {
-  count: Int;
-}
-
-export interface AggregateMovieReviewPromise
-  extends Promise<AggregateMovieReview>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateMovieReviewSubscription
-  extends Promise<AsyncIterator<AggregateMovieReview>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
-export interface MovieReviewSubscriptionPayload {
-  mutation: MutationType;
-  node: MovieReview;
-  updatedFields: String[];
-  previousValues: MovieReviewPreviousValues;
-}
-
-export interface MovieReviewSubscriptionPayloadPromise
-  extends Promise<MovieReviewSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = MovieReviewPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = MovieReviewPreviousValuesPromise>() => T;
-}
-
-export interface MovieReviewSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<MovieReviewSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = MovieReviewSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = MovieReviewPreviousValuesSubscription>() => T;
-}
-
-export interface MovieReviewEdge {
-  node: MovieReview;
-  cursor: String;
-}
-
-export interface MovieReviewEdgePromise
-  extends Promise<MovieReviewEdge>,
-    Fragmentable {
-  node: <T = MovieReviewPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface MovieReviewEdgeSubscription
-  extends Promise<AsyncIterator<MovieReviewEdge>>,
-    Fragmentable {
-  node: <T = MovieReviewSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface UserEdge {
-  node: User;
-  cursor: String;
-}
-
-export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
-  node: <T = UserPromise>() => T;
-  cursor: () => Promise<String>;
-}
-
-export interface UserEdgeSubscription
-  extends Promise<AsyncIterator<UserEdge>>,
-    Fragmentable {
-  node: <T = UserSubscription>() => T;
-  cursor: () => Promise<AsyncIterator<String>>;
-}
-
-export interface MovieReview {
-  id: ID_Output;
-  title: String;
-  rating: Int;
-  review?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface MovieReviewPromise extends Promise<MovieReview>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  title: () => Promise<String>;
-  rating: () => Promise<Int>;
-  review: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface MovieReviewSubscription
-  extends Promise<AsyncIterator<MovieReview>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  title: () => Promise<AsyncIterator<String>>;
-  rating: () => Promise<AsyncIterator<Int>>;
-  review: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface MovieReviewNullablePromise
-  extends Promise<MovieReview | null>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  title: () => Promise<String>;
-  rating: () => Promise<Int>;
-  review: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
 }
 
 export interface MovieReviewConnection {
@@ -746,35 +944,79 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface MovieReviewPreviousValues {
+export interface MoviesPreviousValues {
   id: ID_Output;
-  title: String;
-  rating: Int;
-  review?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
+  movieNm: String;
+  movieNmEn: String;
+  prdtYear: String;
+  openDt: String;
+  prdtStatNm: String;
+  nationAlt: String;
+  genreAlt: String;
+  repNationNm: String;
+  directors: String;
 }
 
-export interface MovieReviewPreviousValuesPromise
-  extends Promise<MovieReviewPreviousValues>,
+export interface MoviesPreviousValuesPromise
+  extends Promise<MoviesPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  title: () => Promise<String>;
-  rating: () => Promise<Int>;
-  review: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
+  movieNm: () => Promise<String>;
+  movieNmEn: () => Promise<String>;
+  prdtYear: () => Promise<String>;
+  openDt: () => Promise<String>;
+  prdtStatNm: () => Promise<String>;
+  nationAlt: () => Promise<String>;
+  genreAlt: () => Promise<String>;
+  repNationNm: () => Promise<String>;
+  directors: () => Promise<String>;
 }
 
-export interface MovieReviewPreviousValuesSubscription
-  extends Promise<AsyncIterator<MovieReviewPreviousValues>>,
+export interface MoviesPreviousValuesSubscription
+  extends Promise<AsyncIterator<MoviesPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  title: () => Promise<AsyncIterator<String>>;
-  rating: () => Promise<AsyncIterator<Int>>;
-  review: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  movieNm: () => Promise<AsyncIterator<String>>;
+  movieNmEn: () => Promise<AsyncIterator<String>>;
+  prdtYear: () => Promise<AsyncIterator<String>>;
+  openDt: () => Promise<AsyncIterator<String>>;
+  prdtStatNm: () => Promise<AsyncIterator<String>>;
+  nationAlt: () => Promise<AsyncIterator<String>>;
+  genreAlt: () => Promise<AsyncIterator<String>>;
+  repNationNm: () => Promise<AsyncIterator<String>>;
+  directors: () => Promise<AsyncIterator<String>>;
+}
+
+export interface AggregateMovieReview {
+  count: Int;
+}
+
+export interface AggregateMovieReviewPromise
+  extends Promise<AggregateMovieReview>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateMovieReviewSubscription
+  extends Promise<AsyncIterator<AggregateMovieReview>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AggregateUser {
+  count: Int;
+}
+
+export interface AggregateUserPromise
+  extends Promise<AggregateUser>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUser>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
 }
 
 export interface UserConnection {
@@ -798,20 +1040,23 @@ export interface UserConnectionSubscription
   aggregate: <T = AggregateUserSubscription>() => T;
 }
 
-export interface AggregateUser {
-  count: Int;
+export interface MovieReviewEdge {
+  node: MovieReview;
+  cursor: String;
 }
 
-export interface AggregateUserPromise
-  extends Promise<AggregateUser>,
+export interface MovieReviewEdgePromise
+  extends Promise<MovieReviewEdge>,
     Fragmentable {
-  count: () => Promise<Int>;
+  node: <T = MovieReviewPromise>() => T;
+  cursor: () => Promise<String>;
 }
 
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUser>>,
+export interface MovieReviewEdgeSubscription
+  extends Promise<AsyncIterator<MovieReviewEdge>>,
     Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
+  node: <T = MovieReviewSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface User {
@@ -881,6 +1126,181 @@ export interface UserNullablePromise
   }) => T;
 }
 
+export interface MoviesEdge {
+  node: Movies;
+  cursor: String;
+}
+
+export interface MoviesEdgePromise extends Promise<MoviesEdge>, Fragmentable {
+  node: <T = MoviesPromise>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface MoviesEdgeSubscription
+  extends Promise<AsyncIterator<MoviesEdge>>,
+    Fragmentable {
+  node: <T = MoviesSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface MovieReviewPreviousValues {
+  id: ID_Output;
+  title: String;
+  rating: Int;
+  review?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface MovieReviewPreviousValuesPromise
+  extends Promise<MovieReviewPreviousValues>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  rating: () => Promise<Int>;
+  review: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface MovieReviewPreviousValuesSubscription
+  extends Promise<AsyncIterator<MovieReviewPreviousValues>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  rating: () => Promise<AsyncIterator<Int>>;
+  review: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface MovieReviewSubscriptionPayload {
+  mutation: MutationType;
+  node: MovieReview;
+  updatedFields: String[];
+  previousValues: MovieReviewPreviousValues;
+}
+
+export interface MovieReviewSubscriptionPayloadPromise
+  extends Promise<MovieReviewSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = MovieReviewPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = MovieReviewPreviousValuesPromise>() => T;
+}
+
+export interface MovieReviewSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<MovieReviewSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = MovieReviewSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = MovieReviewPreviousValuesSubscription>() => T;
+}
+
+export interface MovieReview {
+  id: ID_Output;
+  title: String;
+  rating: Int;
+  review?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface MovieReviewPromise extends Promise<MovieReview>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  rating: () => Promise<Int>;
+  review: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface MovieReviewSubscription
+  extends Promise<AsyncIterator<MovieReview>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  rating: () => Promise<AsyncIterator<Int>>;
+  review: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface MovieReviewNullablePromise
+  extends Promise<MovieReview | null>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  rating: () => Promise<Int>;
+  review: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface MoviesSubscriptionPayload {
+  mutation: MutationType;
+  node: Movies;
+  updatedFields: String[];
+  previousValues: MoviesPreviousValues;
+}
+
+export interface MoviesSubscriptionPayloadPromise
+  extends Promise<MoviesSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = MoviesPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = MoviesPreviousValuesPromise>() => T;
+}
+
+export interface MoviesSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<MoviesSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = MoviesSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = MoviesPreviousValuesSubscription>() => T;
+}
+
+export interface MoviesConnection {
+  pageInfo: PageInfo;
+  edges: MoviesEdge[];
+}
+
+export interface MoviesConnectionPromise
+  extends Promise<MoviesConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<MoviesEdge>>() => T;
+  aggregate: <T = AggregateMoviesPromise>() => T;
+}
+
+export interface MoviesConnectionSubscription
+  extends Promise<AsyncIterator<MoviesConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MoviesEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMoviesSubscription>() => T;
+}
+
+export interface AggregateMovies {
+  count: Int;
+}
+
+export interface AggregateMoviesPromise
+  extends Promise<AggregateMovies>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateMoviesSubscription
+  extends Promise<AsyncIterator<AggregateMovies>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
 export interface UserSubscriptionPayload {
   mutation: MutationType;
   node: User;
@@ -906,22 +1326,30 @@ export interface UserSubscriptionPayloadSubscription
   previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
-/*
-The `Boolean` scalar type represents `true` or `false`.
-*/
-export type Boolean = boolean;
+export interface UserEdge {
+  node: User;
+  cursor: String;
+}
 
-/*
-DateTime scalar input type, allowing Date
-*/
-export type DateTimeInput = Date | string;
+export interface UserEdgePromise extends Promise<UserEdge>, Fragmentable {
+  node: <T = UserPromise>() => T;
+  cursor: () => Promise<String>;
+}
 
-/*
-DateTime scalar output type, which is always a string
-*/
-export type DateTimeOutput = string;
+export interface UserEdgeSubscription
+  extends Promise<AsyncIterator<UserEdge>>,
+    Fragmentable {
+  node: <T = UserSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
 
 export type Long = string;
+
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number;
+export type ID_Output = string;
 
 /*
 The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
@@ -934,10 +1362,19 @@ The `Int` scalar type represents non-fractional signed whole numeric values. Int
 export type Int = number;
 
 /*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+DateTime scalar input type, allowing Date
 */
-export type ID_Input = string | number;
-export type ID_Output = string;
+export type DateTimeInput = Date | string;
+
+/*
+DateTime scalar output type, which is always a string
+*/
+export type DateTimeOutput = string;
+
+/*
+The `Boolean` scalar type represents `true` or `false`.
+*/
+export type Boolean = boolean;
 
 /**
  * Model Metadata
@@ -950,6 +1387,10 @@ export const models: Model[] = [
   },
   {
     name: "MovieReview",
+    embedded: false
+  },
+  {
+    name: "Movies",
     embedded: false
   }
 ];
