@@ -40,6 +40,9 @@ const resolvers = {
 				password: hashedPassword
 			})
 
+			console.log(nickname, identity, password)
+			console.log('user -_-', user)
+
 			return user
 		},
 		login: async (parent, { identity, password }, ctx, info) => {
@@ -56,8 +59,6 @@ const resolvers = {
 			}
 
 			const secret = get('Customer.secret.privateKey')
-
-			console.log('my Secret private key => ', secret)
 
 			const token = sign(
 				{

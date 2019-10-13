@@ -9,9 +9,6 @@ const getUser = (token) => {
 	try {
 		const secret = get('Customer.secret.privateKey')
 
-		console.log('data in paramter =>', token)
-		console.log('my secret token =>', secret)
-
 		return token && verify(token, secret)
 	} catch (err) {
 		console.log(`getUser Function Error => ${err.message}`)

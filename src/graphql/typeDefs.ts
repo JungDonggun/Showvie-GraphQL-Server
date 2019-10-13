@@ -14,7 +14,7 @@ export const typeDefs = gql`
 
 	type User {
 		identity: String!
-		name: String!
+		nickname: String!
 		movieReviews: [MovieReview]
 	}
 

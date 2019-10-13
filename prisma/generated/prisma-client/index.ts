@@ -163,8 +163,8 @@ export type UserOrderByInput =
   | "id_DESC"
   | "identity_ASC"
   | "identity_DESC"
-  | "name_ASC"
-  | "name_DESC"
+  | "nickname_ASC"
+  | "nickname_DESC"
   | "password_ASC"
   | "password_DESC"
   | "createdAt_ASC"
@@ -193,7 +193,7 @@ export interface MovieReviewUpdateDataInput {
 export interface UserCreateInput {
   id?: Maybe<ID_Input>;
   identity: String;
-  name: String;
+  nickname: String;
   password: String;
   movieReviews?: Maybe<MovieReviewCreateManyInput>;
 }
@@ -253,7 +253,7 @@ export interface MovieReviewUpdateManyDataInput {
 
 export interface UserUpdateInput {
   identity?: Maybe<String>;
-  name?: Maybe<String>;
+  nickname?: Maybe<String>;
   password?: Maybe<String>;
   movieReviews?: Maybe<MovieReviewUpdateManyInput>;
 }
@@ -449,20 +449,20 @@ export interface UserWhereInput {
   identity_not_starts_with?: Maybe<String>;
   identity_ends_with?: Maybe<String>;
   identity_not_ends_with?: Maybe<String>;
-  name?: Maybe<String>;
-  name_not?: Maybe<String>;
-  name_in?: Maybe<String[] | String>;
-  name_not_in?: Maybe<String[] | String>;
-  name_lt?: Maybe<String>;
-  name_lte?: Maybe<String>;
-  name_gt?: Maybe<String>;
-  name_gte?: Maybe<String>;
-  name_contains?: Maybe<String>;
-  name_not_contains?: Maybe<String>;
-  name_starts_with?: Maybe<String>;
-  name_not_starts_with?: Maybe<String>;
-  name_ends_with?: Maybe<String>;
-  name_not_ends_with?: Maybe<String>;
+  nickname?: Maybe<String>;
+  nickname_not?: Maybe<String>;
+  nickname_in?: Maybe<String[] | String>;
+  nickname_not_in?: Maybe<String[] | String>;
+  nickname_lt?: Maybe<String>;
+  nickname_lte?: Maybe<String>;
+  nickname_gt?: Maybe<String>;
+  nickname_gte?: Maybe<String>;
+  nickname_contains?: Maybe<String>;
+  nickname_not_contains?: Maybe<String>;
+  nickname_starts_with?: Maybe<String>;
+  nickname_not_starts_with?: Maybe<String>;
+  nickname_ends_with?: Maybe<String>;
+  nickname_not_ends_with?: Maybe<String>;
   password?: Maybe<String>;
   password_not?: Maybe<String>;
   password_in?: Maybe<String[] | String>;
@@ -513,7 +513,7 @@ export interface MovieReviewUpdateManyWithWhereNestedInput {
 
 export interface UserUpdateManyMutationInput {
   identity?: Maybe<String>;
-  name?: Maybe<String>;
+  nickname?: Maybe<String>;
   password?: Maybe<String>;
 }
 
@@ -557,7 +557,7 @@ export interface BatchPayloadSubscription
 export interface UserPreviousValues {
   id: ID_Output;
   identity: String;
-  name: String;
+  nickname: String;
   password: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
@@ -568,7 +568,7 @@ export interface UserPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   identity: () => Promise<String>;
-  name: () => Promise<String>;
+  nickname: () => Promise<String>;
   password: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
@@ -579,7 +579,7 @@ export interface UserPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   identity: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
+  nickname: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -817,7 +817,7 @@ export interface AggregateUserSubscription
 export interface User {
   id: ID_Output;
   identity: String;
-  name: String;
+  nickname: String;
   password: String;
   createdAt: DateTimeOutput;
   updatedAt: DateTimeOutput;
@@ -826,7 +826,7 @@ export interface User {
 export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
   identity: () => Promise<String>;
-  name: () => Promise<String>;
+  nickname: () => Promise<String>;
   password: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;
@@ -846,7 +846,7 @@ export interface UserSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   identity: () => Promise<AsyncIterator<String>>;
-  name: () => Promise<AsyncIterator<String>>;
+  nickname: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -866,7 +866,7 @@ export interface UserNullablePromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   identity: () => Promise<String>;
-  name: () => Promise<String>;
+  nickname: () => Promise<String>;
   password: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
   updatedAt: () => Promise<DateTimeOutput>;

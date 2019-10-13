@@ -1,7 +1,7 @@
 type User {
   id: ID! @id
   identity: String! @unique
-  name: String!
+  nickname: String!
   password: String! @encrypt
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt

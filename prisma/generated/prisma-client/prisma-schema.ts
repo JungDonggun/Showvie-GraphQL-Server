@@ -342,7 +342,7 @@ type Subscription {
 type User {
   id: ID!
   identity: String!
-  name: String!
+  nickname: String!
   password: String!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -358,7 +358,7 @@ type UserConnection {
 input UserCreateInput {
   id: ID
   identity: String!
-  name: String!
+  nickname: String!
   password: String!
   movieReviews: MovieReviewCreateManyInput
 }
@@ -373,8 +373,8 @@ enum UserOrderByInput {
   id_DESC
   identity_ASC
   identity_DESC
-  name_ASC
-  name_DESC
+  nickname_ASC
+  nickname_DESC
   password_ASC
   password_DESC
   createdAt_ASC
@@ -386,7 +386,7 @@ enum UserOrderByInput {
 type UserPreviousValues {
   id: ID!
   identity: String!
-  name: String!
+  nickname: String!
   password: String!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -412,14 +412,14 @@ input UserSubscriptionWhereInput {
 
 input UserUpdateInput {
   identity: String
-  name: String
+  nickname: String
   password: String
   movieReviews: MovieReviewUpdateManyInput
 }
 
 input UserUpdateManyMutationInput {
   identity: String
-  name: String
+  nickname: String
   password: String
 }
 
@@ -452,20 +452,20 @@ input UserWhereInput {
   identity_not_starts_with: String
   identity_ends_with: String
   identity_not_ends_with: String
-  name: String
-  name_not: String
-  name_in: [String!]
-  name_not_in: [String!]
-  name_lt: String
-  name_lte: String
-  name_gt: String
-  name_gte: String
-  name_contains: String
-  name_not_contains: String
-  name_starts_with: String
-  name_not_starts_with: String
-  name_ends_with: String
-  name_not_ends_with: String
+  nickname: String
+  nickname_not: String
+  nickname_in: [String!]
+  nickname_not_in: [String!]
+  nickname_lt: String
+  nickname_lte: String
+  nickname_gt: String
+  nickname_gte: String
+  nickname_contains: String
+  nickname_not_contains: String
+  nickname_starts_with: String
+  nickname_not_starts_with: String
+  nickname_ends_with: String
+  nickname_not_ends_with: String
   password: String
   password_not: String
   password_in: [String!]
