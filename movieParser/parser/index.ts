@@ -1,6 +1,8 @@
 /* eslint-disable max-len */
 import axios from 'axios'
 import API from '../API'
+import { prisma } from '../../prisma/generated/prisma-client'
+
 const movieListTable = 'test'
 
 const MAX_PAGE = 720
@@ -13,42 +15,13 @@ const joinTheDirectors = (directors) => {
 }
 
 const parsedDataInDatabase = (parsedData) => {
-	const isWork = parsedData.map((movieData) => {
-		const {
-			movieNm,
-			movieNmEn,
-			prdtYear,
-			openDt,
-			prdtStatNm,
-			nationAlt,
-			genreAlt,
-			repNationNm,
-			directors
-		} = movieData
+	const isWork = parsedData.map(async (movieData) => {
+		movieData.directors = joinTheDirectors(movieData.directors)
 
-		// @ts-ignore
-		return movieListTable
-			.findOrCreate({
-				where: { movieNm },
-				defaults: {
-					movieNmEn,
-					prdtYear,
-					openDt,
-					prdtStatNm,
-					nationAlt,
-					genreAlt,
-					repNationNm,
-					directors: joinTheDirectors(directors)
-				}
-			})
-			.spread(() => {
-				console.log(`movie Name: ${movieNm}`)
-			})
-			.catch((err) => {
-				if (err.message !== 'movieNmEn must be unique') {
-					console.error('MovieListTable Error =>', err)
-				}
-			})
+		const createMovies = await prisma.createMovies(movieData)
+		console.log('createMovies => ', createMovies)
+
+		return createMovies
 	})
 
 	return Promise.all(isWork).then(() => Promise.resolve(true))
