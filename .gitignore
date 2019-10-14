@@ -6,6 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 .vscode
 
+config/default.json
+
 # Runtime data
 pids
 *.pid

@@ -1,6 +1,6 @@
-import config from 'config'
+import { get } from 'config'
 
-const key = config.get('Customer.API_KEY')
+const key = get('Customer.API_KEY')
 
 const query = `?key=${key}`
 

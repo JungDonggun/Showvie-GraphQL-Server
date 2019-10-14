@@ -1,0 +1,8 @@
+{
+	"Customer": {
+		"secret": {
+			"privateKey": "YOUR_PRIVATE_KEY"
+		},
+		"API_KEY": "YOUR_MOVIE_API_KEY"
+	}
+}
