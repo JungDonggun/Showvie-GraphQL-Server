@@ -6,9 +6,9 @@ import { get } from 'config'
 const resolvers = {
 	Query: {
 		movieList: async (parent, { genreAlt }, context, info) => {
-			const test = await context.prisma.movieLists({ where: { genreAlt } })
+			const movieList = await context.prisma.movieLists({ where: { genreAlt } })
 
-			return test
+			return movieList
 		}
 	},
 	Mutation: {

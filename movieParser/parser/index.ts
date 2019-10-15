@@ -5,7 +5,7 @@ import { prisma } from '../../prisma/generated/prisma-client'
 
 const MAX_PAGE = 720
 const LATEST_PAGE = 389
-const TIMER = 1 // 초 단위
+const TIMER = 0.5 // 초 단위
 
 const joinTheDirectors = (directors) => {
 	const module = directors.map((director) => director.peopleNm).join(',')
@@ -43,7 +43,7 @@ const parsedDataInDatabase = (parsedData) => {
 	return Promise.all(isWork).then(() => Promise.resolve(true))
 }
 
-const getMovieList = async (rowCount = 10, page = 15) => {
+const getMovieList = async (rowCount = 10, page = 91) => {
 	const response = await axios.get(`${API}&itemPerPage=${rowCount}&curPage=${page}`)
 	const pageIndex = page
 
