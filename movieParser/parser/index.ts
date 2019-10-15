@@ -26,7 +26,7 @@ const parsedDataInDatabase = (parsedData) => {
 			directors
 		} = movieData
 
-		const createMovies = await prisma.createMovies({
+		const createMovies = await prisma.createMovieList({
 			movieNm,
 			movieNmEn,
 			prdtYear,
@@ -43,7 +43,7 @@ const parsedDataInDatabase = (parsedData) => {
 	return Promise.all(isWork).then(() => Promise.resolve(true))
 }
 
-const getMovieList = async (rowCount = 10, page = 10) => {
+const getMovieList = async (rowCount = 10, page = 15) => {
 	const response = await axios.get(`${API}&itemPerPage=${rowCount}&curPage=${page}`)
 	const pageIndex = page
 

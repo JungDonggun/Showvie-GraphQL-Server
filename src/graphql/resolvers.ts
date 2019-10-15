@@ -5,30 +5,10 @@ import { get } from 'config'
 // Resolver란, query에서 특정 필드에 대한 요청이 있을 때, 그것을 어떤 로직으로 처리할지 GraphQL에게 알려주는 역할을 합니다.
 const resolvers = {
 	Query: {
-		userData: () => {
-			return {
-				identity: 'admin',
-				name: '어드민',
-				movieReviews: [
-					{
-						title: 'The Hunger Games Mockingjay Part 2',
-						rating: 3,
-						review: 'is funny'
-					}
-				]
-			}
-		},
-		movieList: () => {
-			return [
-				{
-					id: '1',
-					title: 'test1'
-				},
-				{
-					id: '2',
-					title: 'test2'
-				}
-			]
+		movieList: async (parent, { genreAlt }, context, info) => {
+			const test = await context.prisma.movieLists({ where: { genreAlt } })
+
+			return test
 		}
 	},
 	Mutation: {

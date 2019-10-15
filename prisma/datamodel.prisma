@@ -17,7 +17,7 @@ type MovieReview {
   updatedAt: DateTime! @updatedAt
 }
 
-type Movies {
+type MovieList {
   id: ID! @id
   movieNm: String!
   movieNmEn: String!

@@ -7,7 +7,7 @@ export const typeDefs = gql`
 		review: String
 	}
 
-	type MovieList {
+	type Movies {
 		id: String!
 		movieNm: String!
 		movieNmEn: String!
@@ -27,12 +27,12 @@ export const typeDefs = gql`
 	}
 
 	type Query {
+		movieList(genreAlt: String!): [Movies!]!
 	}
 
 	type Mutation {
 		register(nickname: String!, identity: String!, password: String!): User!
 		login(identity: String!, password: String!): LoginResponse!
-		findMovie(genre: String!, list: Int!): [MovieList]
 	}
 
 	type LoginResponse {
