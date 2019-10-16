@@ -27,7 +27,7 @@ export const typeDefs = gql`
 	}
 
 	type Query {
-		movieList(genreAlt: String!): [Movies!]!
+		movieList(genreAlt: String!, startIndex: Int, lastIndex: Int): [Movies!]!
 	}
 
 	type Mutation {
