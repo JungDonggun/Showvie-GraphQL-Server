@@ -19,7 +19,7 @@ type MovieReview {
 
 type MovieList {
   id: ID! @id
-  title: String! @unique
+  title: String! 
   alternativeTitle: String
   extent: String
   language: String
