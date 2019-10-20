@@ -279,7 +279,6 @@ input MovieListWhereInput {
 
 input MovieListWhereUniqueInput {
   id: ID
-  title: String
 }
 
 type MovieReview {

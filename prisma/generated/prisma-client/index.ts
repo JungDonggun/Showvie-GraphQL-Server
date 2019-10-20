@@ -250,7 +250,6 @@ export interface MovieListCreateInput {
 
 export type MovieListWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
-  title?: Maybe<String>;
 }>;
 
 export interface MovieReviewUpdateWithWhereUniqueNestedInput {
@@ -885,29 +884,25 @@ export interface UserPreviousValuesSubscription
   updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
-export interface UserSubscriptionPayload {
-  mutation: MutationType;
-  node: User;
-  updatedFields: String[];
-  previousValues: UserPreviousValues;
+export interface MovieListConnection {
+  pageInfo: PageInfo;
+  edges: MovieListEdge[];
 }
 
-export interface UserSubscriptionPayloadPromise
-  extends Promise<UserSubscriptionPayload>,
+export interface MovieListConnectionPromise
+  extends Promise<MovieListConnection>,
     Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = UserPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = UserPreviousValuesPromise>() => T;
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<MovieListEdge>>() => T;
+  aggregate: <T = AggregateMovieListPromise>() => T;
 }
 
-export interface UserSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+export interface MovieListConnectionSubscription
+  extends Promise<AsyncIterator<MovieListConnection>>,
     Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = UserSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = UserPreviousValuesSubscription>() => T;
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MovieListEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMovieListSubscription>() => T;
 }
 
 export interface PageInfo {
@@ -933,25 +928,35 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface MovieListConnection {
-  pageInfo: PageInfo;
-  edges: MovieListEdge[];
+export interface MovieReviewPreviousValues {
+  id: ID_Output;
+  title: String;
+  rating: Int;
+  review?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
 }
 
-export interface MovieListConnectionPromise
-  extends Promise<MovieListConnection>,
+export interface MovieReviewPreviousValuesPromise
+  extends Promise<MovieReviewPreviousValues>,
     Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<MovieListEdge>>() => T;
-  aggregate: <T = AggregateMovieListPromise>() => T;
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  rating: () => Promise<Int>;
+  review: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
 }
 
-export interface MovieListConnectionSubscription
-  extends Promise<AsyncIterator<MovieListConnection>>,
+export interface MovieReviewPreviousValuesSubscription
+  extends Promise<AsyncIterator<MovieReviewPreviousValues>>,
     Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<MovieListEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateMovieListSubscription>() => T;
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  rating: () => Promise<AsyncIterator<Int>>;
+  review: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
 }
 
 export interface AggregateMovieList {
@@ -1180,99 +1185,6 @@ export interface MovieListSubscriptionPayloadSubscription
   previousValues: <T = MovieListPreviousValuesSubscription>() => T;
 }
 
-export interface MovieReviewSubscriptionPayload {
-  mutation: MutationType;
-  node: MovieReview;
-  updatedFields: String[];
-  previousValues: MovieReviewPreviousValues;
-}
-
-export interface MovieReviewSubscriptionPayloadPromise
-  extends Promise<MovieReviewSubscriptionPayload>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = MovieReviewPromise>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = MovieReviewPreviousValuesPromise>() => T;
-}
-
-export interface MovieReviewSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<MovieReviewSubscriptionPayload>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = MovieReviewSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = MovieReviewPreviousValuesSubscription>() => T;
-}
-
-export interface MovieReviewPreviousValues {
-  id: ID_Output;
-  title: String;
-  rating: Int;
-  review?: String;
-  createdAt: DateTimeOutput;
-  updatedAt: DateTimeOutput;
-}
-
-export interface MovieReviewPreviousValuesPromise
-  extends Promise<MovieReviewPreviousValues>,
-    Fragmentable {
-  id: () => Promise<ID_Output>;
-  title: () => Promise<String>;
-  rating: () => Promise<Int>;
-  review: () => Promise<String>;
-  createdAt: () => Promise<DateTimeOutput>;
-  updatedAt: () => Promise<DateTimeOutput>;
-}
-
-export interface MovieReviewPreviousValuesSubscription
-  extends Promise<AsyncIterator<MovieReviewPreviousValues>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  title: () => Promise<AsyncIterator<String>>;
-  rating: () => Promise<AsyncIterator<Int>>;
-  review: () => Promise<AsyncIterator<String>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-}
-
-export interface MovieReviewConnection {
-  pageInfo: PageInfo;
-  edges: MovieReviewEdge[];
-}
-
-export interface MovieReviewConnectionPromise
-  extends Promise<MovieReviewConnection>,
-    Fragmentable {
-  pageInfo: <T = PageInfoPromise>() => T;
-  edges: <T = FragmentableArray<MovieReviewEdge>>() => T;
-  aggregate: <T = AggregateMovieReviewPromise>() => T;
-}
-
-export interface MovieReviewConnectionSubscription
-  extends Promise<AsyncIterator<MovieReviewConnection>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<MovieReviewEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateMovieReviewSubscription>() => T;
-}
-
-export interface AggregateMovieReview {
-  count: Int;
-}
-
-export interface AggregateMovieReviewPromise
-  extends Promise<AggregateMovieReview>,
-    Fragmentable {
-  count: () => Promise<Int>;
-}
-
-export interface AggregateMovieReviewSubscription
-  extends Promise<AsyncIterator<AggregateMovieReview>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Int>>;
-}
-
 export interface MovieList {
   id: ID_Output;
   title: String;
@@ -1329,6 +1241,93 @@ export interface MovieListNullablePromise
   subjectCategory: () => Promise<String>;
 }
 
+export interface MovieReviewSubscriptionPayload {
+  mutation: MutationType;
+  node: MovieReview;
+  updatedFields: String[];
+  previousValues: MovieReviewPreviousValues;
+}
+
+export interface MovieReviewSubscriptionPayloadPromise
+  extends Promise<MovieReviewSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = MovieReviewPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = MovieReviewPreviousValuesPromise>() => T;
+}
+
+export interface MovieReviewSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<MovieReviewSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = MovieReviewSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = MovieReviewPreviousValuesSubscription>() => T;
+}
+
+export interface MovieReviewConnection {
+  pageInfo: PageInfo;
+  edges: MovieReviewEdge[];
+}
+
+export interface MovieReviewConnectionPromise
+  extends Promise<MovieReviewConnection>,
+    Fragmentable {
+  pageInfo: <T = PageInfoPromise>() => T;
+  edges: <T = FragmentableArray<MovieReviewEdge>>() => T;
+  aggregate: <T = AggregateMovieReviewPromise>() => T;
+}
+
+export interface MovieReviewConnectionSubscription
+  extends Promise<AsyncIterator<MovieReviewConnection>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<MovieReviewEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateMovieReviewSubscription>() => T;
+}
+
+export interface AggregateMovieReview {
+  count: Int;
+}
+
+export interface AggregateMovieReviewPromise
+  extends Promise<AggregateMovieReview>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateMovieReviewSubscription
+  extends Promise<AsyncIterator<AggregateMovieReview>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface UserSubscriptionPayload {
+  mutation: MutationType;
+  node: User;
+  updatedFields: String[];
+  previousValues: UserPreviousValues;
+}
+
+export interface UserSubscriptionPayloadPromise
+  extends Promise<UserSubscriptionPayload>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = UserPromise>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = UserPreviousValuesPromise>() => T;
+}
+
+export interface UserSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<UserSubscriptionPayload>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = UserSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = UserPreviousValuesSubscription>() => T;
+}
+
 export interface UserEdge {
   node: User;
   cursor: String;
@@ -1355,6 +1354,11 @@ export type ID_Input = string | number;
 export type ID_Output = string;
 
 /*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
+
+/*
 DateTime scalar input type, allowing Date
 */
 export type DateTimeInput = Date | string;
@@ -1373,11 +1377,6 @@ export type Int = number;
 The `Boolean` scalar type represents `true` or `false`.
 */
 export type Boolean = boolean;
-
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
 
 /**
  * Model Metadata
