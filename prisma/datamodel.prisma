@@ -19,13 +19,13 @@ type MovieReview {
 
 type MovieList {
   id: ID! @id
-  movieNm: String!
-  movieNmEn: String!
-  prdtYear: String!
-  openDt: String!
-  prdtStatNm: String!
-  nationAlt: String!
-  genreAlt: String!
-  repNationNm: String!
-  directors: String!
+  title: String! @unique
+  alternativeTitle: String
+  extent: String
+  language: String
+  regDate: DateTime
+  person: String
+  referenceIdentifier: String
+  rights: String
+  subjectCategory: String
 }
