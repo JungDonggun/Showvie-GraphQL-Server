@@ -2,64 +2,58 @@
 import axios from 'axios'
 import API from '../API'
 import { prisma } from '../../prisma/generated/prisma-client'
+import { movieType } from '../../lib/types/movie'
 
-const MAX_PAGE = 720
-const LATEST_PAGE = 389
 const TIMER = 0.5 // 초 단위
 
-const joinTheDirectors = (directors) => {
-	const module = directors.map((director) => director.peopleNm).join(',')
-	return module
-}
-
 const parsedDataInDatabase = (parsedData) => {
-	const isWork = parsedData.map(async (movieData) => {
+	const isWork = parsedData.map(async (movieData: movieType) => {
 		const {
-			movieNm,
-			movieNmEn,
-			prdtYear,
-			openDt,
-			prdtStatNm,
-			nationAlt,
-			genreAlt,
-			repNationNm,
-			directors
+			title,
+			alternativeTitle,
+			language,
+			regDate,
+			person,
+			referenceIdentifier,
+			rights
 		} = movieData
 
+		let { extent, subjectCategory } = movieData
+
+		extent = extent.split(':')[1].replace(' ', '')
+		subjectCategory = subjectCategory.split(':')[1].replace(' ', '')
+
 		const createMovies = await prisma.createMovieList({
-			movieNm,
-			movieNmEn,
-			prdtYear,
-			openDt,
-			prdtStatNm,
-			nationAlt,
-			genreAlt,
-			repNationNm,
-			directors: joinTheDirectors(directors)
+			title,
+			alternativeTitle,
+			extent,
+			language,
+			regDate,
+			person,
+			referenceIdentifier,
+			rights,
+			subjectCategory
 		})
+
 		return createMovies
 	})
 
 	return Promise.all(isWork).then(() => Promise.resolve(true))
 }
 
-const getMovieList = async (rowCount = 10, page = 91) => {
-	const response = await axios.get(`${API}&itemPerPage=${rowCount}&curPage=${page}`)
+const getMovieList = async (rowCount = 10, page = 1) => {
+	const response = await axios.get(`${API}?numOfRows=${rowCount}&pageNo=${page}`)
 	const pageIndex = page
 
 	try {
-		const { movieList } = response.data.movieListResult
+		const parsedData = response.data.response.body.items.item
 
-		if (pageIndex > MAX_PAGE) {
-			throw console.log('해당 API에 영화 정보가 더이상 없습니다.')
-		}
-
-		const saveInDatabase = await parsedDataInDatabase(movieList)
+		const saveInDatabase = await parsedDataInDatabase(parsedData)
 
 		if (saveInDatabase) {
 			setTimeout(() => {
 				getMovieList(rowCount, page + 1)
-				console.log(`크롤링 상황 ${page}/${MAX_PAGE}`)
+				console.log(`${page} 페이지를 DataBase에 저장했습니다.`)
 			}, TIMER * 1000)
 		}
 	} catch (err) {

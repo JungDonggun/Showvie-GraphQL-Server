@@ -6,6 +6,12 @@ import { get } from 'config'
 const resolvers = {
 	Query: {
 		movieList: async (parent, { genreAlt, startIndex, lastIndex }, context, info) => {
+			console.log('Start at movieList', {
+				genreAlt,
+				startIndex,
+				lastIndex
+			})
+
 			const movieList = await context.prisma.movieLists()
 			const filteredMovieList = movieList
 				.filter((word) => word.genreAlt.indexOf(genreAlt) === 0)

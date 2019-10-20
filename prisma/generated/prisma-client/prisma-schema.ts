@@ -24,15 +24,15 @@ scalar Long
 
 type MovieList {
   id: ID!
-  movieNm: String!
-  movieNmEn: String!
-  prdtYear: String!
-  openDt: String!
-  prdtStatNm: String!
-  nationAlt: String!
-  genreAlt: String!
-  repNationNm: String!
-  directors: String!
+  title: String!
+  alternativeTitle: String
+  extent: String
+  language: String
+  regDate: DateTime
+  person: String
+  referenceIdentifier: String
+  rights: String
+  subjectCategory: String
 }
 
 type MovieListConnection {
@@ -43,15 +43,15 @@ type MovieListConnection {
 
 input MovieListCreateInput {
   id: ID
-  movieNm: String!
-  movieNmEn: String!
-  prdtYear: String!
-  openDt: String!
-  prdtStatNm: String!
-  nationAlt: String!
-  genreAlt: String!
-  repNationNm: String!
-  directors: String!
+  title: String!
+  alternativeTitle: String
+  extent: String
+  language: String
+  regDate: DateTime
+  person: String
+  referenceIdentifier: String
+  rights: String
+  subjectCategory: String
 }
 
 type MovieListEdge {
@@ -62,37 +62,37 @@ type MovieListEdge {
 enum MovieListOrderByInput {
   id_ASC
   id_DESC
-  movieNm_ASC
-  movieNm_DESC
-  movieNmEn_ASC
-  movieNmEn_DESC
-  prdtYear_ASC
-  prdtYear_DESC
-  openDt_ASC
-  openDt_DESC
-  prdtStatNm_ASC
-  prdtStatNm_DESC
-  nationAlt_ASC
-  nationAlt_DESC
-  genreAlt_ASC
-  genreAlt_DESC
-  repNationNm_ASC
-  repNationNm_DESC
-  directors_ASC
-  directors_DESC
+  title_ASC
+  title_DESC
+  alternativeTitle_ASC
+  alternativeTitle_DESC
+  extent_ASC
+  extent_DESC
+  language_ASC
+  language_DESC
+  regDate_ASC
+  regDate_DESC
+  person_ASC
+  person_DESC
+  referenceIdentifier_ASC
+  referenceIdentifier_DESC
+  rights_ASC
+  rights_DESC
+  subjectCategory_ASC
+  subjectCategory_DESC
 }
 
 type MovieListPreviousValues {
   id: ID!
-  movieNm: String!
-  movieNmEn: String!
-  prdtYear: String!
-  openDt: String!
-  prdtStatNm: String!
-  nationAlt: String!
-  genreAlt: String!
-  repNationNm: String!
-  directors: String!
+  title: String!
+  alternativeTitle: String
+  extent: String
+  language: String
+  regDate: DateTime
+  person: String
+  referenceIdentifier: String
+  rights: String
+  subjectCategory: String
 }
 
 type MovieListSubscriptionPayload {
@@ -114,27 +114,27 @@ input MovieListSubscriptionWhereInput {
 }
 
 input MovieListUpdateInput {
-  movieNm: String
-  movieNmEn: String
-  prdtYear: String
-  openDt: String
-  prdtStatNm: String
-  nationAlt: String
-  genreAlt: String
-  repNationNm: String
-  directors: String
+  title: String
+  alternativeTitle: String
+  extent: String
+  language: String
+  regDate: DateTime
+  person: String
+  referenceIdentifier: String
+  rights: String
+  subjectCategory: String
 }
 
 input MovieListUpdateManyMutationInput {
-  movieNm: String
-  movieNmEn: String
-  prdtYear: String
-  openDt: String
-  prdtStatNm: String
-  nationAlt: String
-  genreAlt: String
-  repNationNm: String
-  directors: String
+  title: String
+  alternativeTitle: String
+  extent: String
+  language: String
+  regDate: DateTime
+  person: String
+  referenceIdentifier: String
+  rights: String
+  subjectCategory: String
 }
 
 input MovieListWhereInput {
@@ -152,132 +152,126 @@ input MovieListWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  movieNm: String
-  movieNm_not: String
-  movieNm_in: [String!]
-  movieNm_not_in: [String!]
-  movieNm_lt: String
-  movieNm_lte: String
-  movieNm_gt: String
-  movieNm_gte: String
-  movieNm_contains: String
-  movieNm_not_contains: String
-  movieNm_starts_with: String
-  movieNm_not_starts_with: String
-  movieNm_ends_with: String
-  movieNm_not_ends_with: String
-  movieNmEn: String
-  movieNmEn_not: String
-  movieNmEn_in: [String!]
-  movieNmEn_not_in: [String!]
-  movieNmEn_lt: String
-  movieNmEn_lte: String
-  movieNmEn_gt: String
-  movieNmEn_gte: String
-  movieNmEn_contains: String
-  movieNmEn_not_contains: String
-  movieNmEn_starts_with: String
-  movieNmEn_not_starts_with: String
-  movieNmEn_ends_with: String
-  movieNmEn_not_ends_with: String
-  prdtYear: String
-  prdtYear_not: String
-  prdtYear_in: [String!]
-  prdtYear_not_in: [String!]
-  prdtYear_lt: String
-  prdtYear_lte: String
-  prdtYear_gt: String
-  prdtYear_gte: String
-  prdtYear_contains: String
-  prdtYear_not_contains: String
-  prdtYear_starts_with: String
-  prdtYear_not_starts_with: String
-  prdtYear_ends_with: String
-  prdtYear_not_ends_with: String
-  openDt: String
-  openDt_not: String
-  openDt_in: [String!]
-  openDt_not_in: [String!]
-  openDt_lt: String
-  openDt_lte: String
-  openDt_gt: String
-  openDt_gte: String
-  openDt_contains: String
-  openDt_not_contains: String
-  openDt_starts_with: String
-  openDt_not_starts_with: String
-  openDt_ends_with: String
-  openDt_not_ends_with: String
-  prdtStatNm: String
-  prdtStatNm_not: String
-  prdtStatNm_in: [String!]
-  prdtStatNm_not_in: [String!]
-  prdtStatNm_lt: String
-  prdtStatNm_lte: String
-  prdtStatNm_gt: String
-  prdtStatNm_gte: String
-  prdtStatNm_contains: String
-  prdtStatNm_not_contains: String
-  prdtStatNm_starts_with: String
-  prdtStatNm_not_starts_with: String
-  prdtStatNm_ends_with: String
-  prdtStatNm_not_ends_with: String
-  nationAlt: String
-  nationAlt_not: String
-  nationAlt_in: [String!]
-  nationAlt_not_in: [String!]
-  nationAlt_lt: String
-  nationAlt_lte: String
-  nationAlt_gt: String
-  nationAlt_gte: String
-  nationAlt_contains: String
-  nationAlt_not_contains: String
-  nationAlt_starts_with: String
-  nationAlt_not_starts_with: String
-  nationAlt_ends_with: String
-  nationAlt_not_ends_with: String
-  genreAlt: String
-  genreAlt_not: String
-  genreAlt_in: [String!]
-  genreAlt_not_in: [String!]
-  genreAlt_lt: String
-  genreAlt_lte: String
-  genreAlt_gt: String
-  genreAlt_gte: String
-  genreAlt_contains: String
-  genreAlt_not_contains: String
-  genreAlt_starts_with: String
-  genreAlt_not_starts_with: String
-  genreAlt_ends_with: String
-  genreAlt_not_ends_with: String
-  repNationNm: String
-  repNationNm_not: String
-  repNationNm_in: [String!]
-  repNationNm_not_in: [String!]
-  repNationNm_lt: String
-  repNationNm_lte: String
-  repNationNm_gt: String
-  repNationNm_gte: String
-  repNationNm_contains: String
-  repNationNm_not_contains: String
-  repNationNm_starts_with: String
-  repNationNm_not_starts_with: String
-  repNationNm_ends_with: String
-  repNationNm_not_ends_with: String
-  directors: String
-  directors_not: String
-  directors_in: [String!]
-  directors_not_in: [String!]
-  directors_lt: String
-  directors_lte: String
-  directors_gt: String
-  directors_gte: String
-  directors_contains: String
-  directors_not_contains: String
-  directors_starts_with: String
-  directors_not_starts_with: String
-  directors_ends_with: String
-  directors_not_ends_with: String
+  title: String
+  title_not: String
+  title_in: [String!]
+  title_not_in: [String!]
+  title_lt: String
+  title_lte: String
+  title_gt: String
+  title_gte: String
+  title_contains: String
+  title_not_contains: String
+  title_starts_with: String
+  title_not_starts_with: String
+  title_ends_with: String
+  title_not_ends_with: String
+  alternativeTitle: String
+  alternativeTitle_not: String
+  alternativeTitle_in: [String!]
+  alternativeTitle_not_in: [String!]
+  alternativeTitle_lt: String
+  alternativeTitle_lte: String
+  alternativeTitle_gt: String
+  alternativeTitle_gte: String
+  alternativeTitle_contains: String
+  alternativeTitle_not_contains: String
+  alternativeTitle_starts_with: String
+  alternativeTitle_not_starts_with: String
+  alternativeTitle_ends_with: String
+  alternativeTitle_not_ends_with: String
+  extent: String
+  extent_not: String
+  extent_in: [String!]
+  extent_not_in: [String!]
+  extent_lt: String
+  extent_lte: String
+  extent_gt: String
+  extent_gte: String
+  extent_contains: String
+  extent_not_contains: String
+  extent_starts_with: String
+  extent_not_starts_with: String
+  extent_ends_with: String
+  extent_not_ends_with: String
+  language: String
+  language_not: String
+  language_in: [String!]
+  language_not_in: [String!]
+  language_lt: String
+  language_lte: String
+  language_gt: String
+  language_gte: String
+  language_contains: String
+  language_not_contains: String
+  language_starts_with: String
+  language_not_starts_with: String
+  language_ends_with: String
+  language_not_ends_with: String
+  regDate: DateTime
+  regDate_not: DateTime
+  regDate_in: [DateTime!]
+  regDate_not_in: [DateTime!]
+  regDate_lt: DateTime
+  regDate_lte: DateTime
+  regDate_gt: DateTime
+  regDate_gte: DateTime
+  person: String
+  person_not: String
+  person_in: [String!]
+  person_not_in: [String!]
+  person_lt: String
+  person_lte: String
+  person_gt: String
+  person_gte: String
+  person_contains: String
+  person_not_contains: String
+  person_starts_with: String
+  person_not_starts_with: String
+  person_ends_with: String
+  person_not_ends_with: String
+  referenceIdentifier: String
+  referenceIdentifier_not: String
+  referenceIdentifier_in: [String!]
+  referenceIdentifier_not_in: [String!]
+  referenceIdentifier_lt: String
+  referenceIdentifier_lte: String
+  referenceIdentifier_gt: String
+  referenceIdentifier_gte: String
+  referenceIdentifier_contains: String
+  referenceIdentifier_not_contains: String
+  referenceIdentifier_starts_with: String
+  referenceIdentifier_not_starts_with: String
+  referenceIdentifier_ends_with: String
+  referenceIdentifier_not_ends_with: String
+  rights: String
+  rights_not: String
+  rights_in: [String!]
+  rights_not_in: [String!]
+  rights_lt: String
+  rights_lte: String
+  rights_gt: String
+  rights_gte: String
+  rights_contains: String
+  rights_not_contains: String
+  rights_starts_with: String
+  rights_not_starts_with: String
+  rights_ends_with: String
+  rights_not_ends_with: String
+  subjectCategory: String
+  subjectCategory_not: String
+  subjectCategory_in: [String!]
+  subjectCategory_not_in: [String!]
+  subjectCategory_lt: String
+  subjectCategory_lte: String
+  subjectCategory_gt: String
+  subjectCategory_gte: String
+  subjectCategory_contains: String
+  subjectCategory_not_contains: String
+  subjectCategory_starts_with: String
+  subjectCategory_not_starts_with: String
+  subjectCategory_ends_with: String
+  subjectCategory_not_ends_with: String
   AND: [MovieListWhereInput!]
   OR: [MovieListWhereInput!]
   NOT: [MovieListWhereInput!]
@@ -285,6 +279,7 @@ input MovieListWhereInput {
 
 input MovieListWhereUniqueInput {
   id: ID
+  title: String
 }
 
 type MovieReview {
