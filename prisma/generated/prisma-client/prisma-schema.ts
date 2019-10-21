@@ -25,6 +25,7 @@ scalar Long
 type MovieList {
   id: ID!
   title: String!
+  splitData: String
   alternativeTitle: String
   extent: String
   language: String
@@ -44,6 +45,7 @@ type MovieListConnection {
 input MovieListCreateInput {
   id: ID
   title: String!
+  splitData: String
   alternativeTitle: String
   extent: String
   language: String
@@ -64,6 +66,8 @@ enum MovieListOrderByInput {
   id_DESC
   title_ASC
   title_DESC
+  splitData_ASC
+  splitData_DESC
   alternativeTitle_ASC
   alternativeTitle_DESC
   extent_ASC
@@ -85,6 +89,7 @@ enum MovieListOrderByInput {
 type MovieListPreviousValues {
   id: ID!
   title: String!
+  splitData: String
   alternativeTitle: String
   extent: String
   language: String
@@ -115,6 +120,7 @@ input MovieListSubscriptionWhereInput {
 
 input MovieListUpdateInput {
   title: String
+  splitData: String
   alternativeTitle: String
   extent: String
   language: String
@@ -127,6 +133,7 @@ input MovieListUpdateInput {
 
 input MovieListUpdateManyMutationInput {
   title: String
+  splitData: String
   alternativeTitle: String
   extent: String
   language: String
@@ -166,6 +173,20 @@ input MovieListWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
+  splitData: String
+  splitData_not: String
+  splitData_in: [String!]
+  splitData_not_in: [String!]
+  splitData_lt: String
+  splitData_lte: String
+  splitData_gt: String
+  splitData_gte: String
+  splitData_contains: String
+  splitData_not_contains: String
+  splitData_starts_with: String
+  splitData_not_starts_with: String
+  splitData_ends_with: String
+  splitData_not_ends_with: String
   alternativeTitle: String
   alternativeTitle_not: String
   alternativeTitle_in: [String!]

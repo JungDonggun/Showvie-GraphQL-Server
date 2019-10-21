@@ -11,6 +11,7 @@ const parsedDataInDatabase = (parsedData) => {
 		const {
 			title,
 			alternativeTitle,
+			description,
 			language,
 			regDate,
 			referenceIdentifier,
@@ -20,16 +21,21 @@ const parsedDataInDatabase = (parsedData) => {
 			person
 		} = movieData
 
+		const splitData = (text) => {
+			return text.split(':')[1].replace(' ', '')
+		}
+
 		const createMovies = await prisma.createMovieList({
 			title: title.toString(),
 			alternativeTitle,
-			extent: extent.split(':')[1].replace(' ', ''),
+			description: splitData(description),
+			extent: splitData(extent),
 			language,
 			regDate,
-			person: person.split(':')[1].replace(' ', ''),
+			person: splitData(person),
 			referenceIdentifier,
 			rights,
-			subjectCategory: subjectCategory.split(':')[1].replace(' ', '')
+			subjectCategory: splitData(subjectCategory)
 		})
 
 		return createMovies

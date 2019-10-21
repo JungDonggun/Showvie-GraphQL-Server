@@ -1,5 +1,6 @@
 export type movieType = {
 	title: string
+	description: string
 	alternativeTitle: string
 	extent: string
 	language: string
