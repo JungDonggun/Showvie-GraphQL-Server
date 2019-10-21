@@ -25,15 +25,13 @@ const parsedDataInDatabase = (parsedData) => {
 			return text.split(':')[1].replace(' ', '')
 		}
 
-		const findData = async (title: string) => {
-			return await prisma.$exists.movieList({ title })
-		}
-
 		const anyToString = (text: any) => {
 			return text.toString()
 		}
 
-		if (!findData(anyToString(title))) {
+		const movie = await prisma.$exists.movieList({ title: anyToString(title) })
+
+		if (!movie) {
 			const createMovies = await prisma.createMovieList({
 				title: anyToString(title),
 				alternativeTitle: alternativeTitle && anyToString(alternativeTitle),
