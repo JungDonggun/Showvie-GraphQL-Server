@@ -9,15 +9,17 @@ export const typeDefs = gql`
 
 	type Movies {
 		id: String!
-		movieNm: String!
-		movieNmEn: String!
-		prdtYear: String!
-		openDt: String!
-		prdtStatNm: String!
-		nationAlt: String!
-		genreAlt: String!
-		repNationNm: String!
-		directors: String!
+		title: String!
+		description: String
+		splitData: String
+		alternativeTitle: String
+		extent: String
+		language: String
+		regDate: String
+		person: String
+		referenceIdentifier: String
+		rights: String
+		subjectCategory: String
 	}
 
 	type User {
