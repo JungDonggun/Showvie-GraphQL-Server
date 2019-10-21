@@ -7,54 +7,60 @@ import { movieType } from '../../lib/types/movie'
 const TIMER = 0.5 // 초 단위
 
 const parsedDataInDatabase = (parsedData) => {
-	const isWork = parsedData.map(async (movieData: movieType) => {
-		const {
-			title,
-			alternativeTitle,
-			description,
-			language,
-			regDate,
-			referenceIdentifier,
-			rights,
-			extent,
-			subjectCategory,
-			person
-		} = movieData
-
-		const splitData = (text: string) => {
-			return text.split(':')[1].replace(' ', '')
-		}
-
-		const anyToString = (text: any) => {
-			return text.toString()
-		}
-
-		const movie = await prisma.$exists.movieList({ title: anyToString(title) })
-
-		if (!movie) {
-			const createMovies = await prisma.createMovieList({
-				title: anyToString(title),
-				alternativeTitle: alternativeTitle && anyToString(alternativeTitle),
-				description: anyToString(description),
-				extent: splitData(extent),
+	try {
+		const isWork = parsedData.map(async (movieData: movieType) => {
+			const {
+				title,
+				alternativeTitle,
+				description,
 				language,
 				regDate,
-				person: splitData(person),
 				referenceIdentifier,
 				rights,
-				subjectCategory: splitData(subjectCategory)
-			})
+				extent,
+				subjectCategory,
+				person
+			} = movieData
 
-			return createMovies
-		} else {
-			return null
-		}
-	})
+			const splitData = (text: string) => {
+				return text.split(':')[1].replace(' ', '')
+			}
 
-	return Promise.all(isWork).then(() => Promise.resolve(true)).catch((err) => Promise.reject(err))
+			const anyToString = (text: any) => {
+				return text.toString()
+			}
+
+			const movie = await prisma.$exists.movieList({ title: anyToString(title) })
+
+			if (!movie) {
+				const createMovies = await prisma.createMovieList({
+					title: anyToString(title),
+					alternativeTitle: alternativeTitle && anyToString(alternativeTitle),
+					description: anyToString(description),
+					extent: splitData(extent),
+					language,
+					regDate,
+					person: splitData(person),
+					referenceIdentifier,
+					rights: rights && anyToString(rights),
+					subjectCategory: splitData(subjectCategory)
+				})
+
+				return createMovies
+			} else {
+				return null
+			}
+		})
+
+		return Promise.all(isWork)
+			.then(() => Promise.resolve(true))
+			.catch((err) => Promise.reject(err))
+	} catch {
+		console.log('Movie Parser가 종료되었습니다.')
+	}
 }
 
-const getMovieList = async (rowCount = 10, page = 1) => {
+const getMovieList = async (rowCount = 100, page = 697) => {
 	const response = await axios.get(`${API}?numOfRows=${rowCount}&pageNo=${page}`)
 	const pageIndex = page
 
