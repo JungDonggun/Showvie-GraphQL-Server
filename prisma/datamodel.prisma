@@ -20,6 +20,7 @@ type MovieReview {
 type MovieList {
   id: ID! @id
   title: String! 
+  description: String
   splitData: String
   alternativeTitle: String
   extent: String

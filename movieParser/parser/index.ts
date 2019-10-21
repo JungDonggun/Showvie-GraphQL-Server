@@ -21,24 +21,36 @@ const parsedDataInDatabase = (parsedData) => {
 			person
 		} = movieData
 
-		const splitData = (text) => {
+		const splitData = (text: string) => {
 			return text.split(':')[1].replace(' ', '')
 		}
 
-		const createMovies = await prisma.createMovieList({
-			title: title.toString(),
-			alternativeTitle,
-			description: splitData(description),
-			extent: splitData(extent),
-			language,
-			regDate,
-			person: splitData(person),
-			referenceIdentifier,
-			rights,
-			subjectCategory: splitData(subjectCategory)
-		})
+		const findData = async (title: string) => {
+			return await prisma.$exists.movieList({ title })
+		}
 
-		return createMovies
+		const anyToString = (text: any) => {
+			return text.toString()
+		}
+
+		if (!findData(anyToString(title))) {
+			const createMovies = await prisma.createMovieList({
+				title: anyToString(title),
+				alternativeTitle: alternativeTitle && anyToString(alternativeTitle),
+				description: anyToString(description),
+				extent: splitData(extent),
+				language,
+				regDate,
+				person: splitData(person),
+				referenceIdentifier,
+				rights,
+				subjectCategory: splitData(subjectCategory)
+			})
+
+			return createMovies
+		} else {
+			return null
+		}
 	})
 
 	return Promise.all(isWork).then(() => Promise.resolve(true)).catch((err) => Promise.reject(err))

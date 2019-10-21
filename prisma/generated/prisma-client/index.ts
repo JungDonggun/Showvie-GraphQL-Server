@@ -188,6 +188,10 @@ export type MovieListOrderByInput =
   | "id_DESC"
   | "title_ASC"
   | "title_DESC"
+  | "description_ASC"
+  | "description_DESC"
+  | "splitData_ASC"
+  | "splitData_DESC"
   | "alternativeTitle_ASC"
   | "alternativeTitle_DESC"
   | "extent_ASC"
@@ -238,6 +242,8 @@ export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 export interface MovieListCreateInput {
   id?: Maybe<ID_Input>;
   title: String;
+  description?: Maybe<String>;
+  splitData?: Maybe<String>;
   alternativeTitle?: Maybe<String>;
   extent?: Maybe<String>;
   language?: Maybe<String>;
@@ -298,6 +304,34 @@ export interface MovieListWhereInput {
   title_not_starts_with?: Maybe<String>;
   title_ends_with?: Maybe<String>;
   title_not_ends_with?: Maybe<String>;
+  description?: Maybe<String>;
+  description_not?: Maybe<String>;
+  description_in?: Maybe<String[] | String>;
+  description_not_in?: Maybe<String[] | String>;
+  description_lt?: Maybe<String>;
+  description_lte?: Maybe<String>;
+  description_gt?: Maybe<String>;
+  description_gte?: Maybe<String>;
+  description_contains?: Maybe<String>;
+  description_not_contains?: Maybe<String>;
+  description_starts_with?: Maybe<String>;
+  description_not_starts_with?: Maybe<String>;
+  description_ends_with?: Maybe<String>;
+  description_not_ends_with?: Maybe<String>;
+  splitData?: Maybe<String>;
+  splitData_not?: Maybe<String>;
+  splitData_in?: Maybe<String[] | String>;
+  splitData_not_in?: Maybe<String[] | String>;
+  splitData_lt?: Maybe<String>;
+  splitData_lte?: Maybe<String>;
+  splitData_gt?: Maybe<String>;
+  splitData_gte?: Maybe<String>;
+  splitData_contains?: Maybe<String>;
+  splitData_not_contains?: Maybe<String>;
+  splitData_starts_with?: Maybe<String>;
+  splitData_not_starts_with?: Maybe<String>;
+  splitData_ends_with?: Maybe<String>;
+  splitData_not_ends_with?: Maybe<String>;
   alternativeTitle?: Maybe<String>;
   alternativeTitle_not?: Maybe<String>;
   alternativeTitle_in?: Maybe<String[] | String>;
@@ -665,6 +699,8 @@ export interface MovieReviewUpdateManyDataInput {
 
 export interface MovieListUpdateManyMutationInput {
   title?: Maybe<String>;
+  description?: Maybe<String>;
+  splitData?: Maybe<String>;
   alternativeTitle?: Maybe<String>;
   extent?: Maybe<String>;
   language?: Maybe<String>;
@@ -677,6 +713,8 @@ export interface MovieListUpdateManyMutationInput {
 
 export interface MovieListUpdateInput {
   title?: Maybe<String>;
+  description?: Maybe<String>;
+  splitData?: Maybe<String>;
   alternativeTitle?: Maybe<String>;
   extent?: Maybe<String>;
   language?: Maybe<String>;
@@ -1120,6 +1158,8 @@ export interface MovieReviewEdgeSubscription
 export interface MovieListPreviousValues {
   id: ID_Output;
   title: String;
+  description?: String;
+  splitData?: String;
   alternativeTitle?: String;
   extent?: String;
   language?: String;
@@ -1135,6 +1175,8 @@ export interface MovieListPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   title: () => Promise<String>;
+  description: () => Promise<String>;
+  splitData: () => Promise<String>;
   alternativeTitle: () => Promise<String>;
   extent: () => Promise<String>;
   language: () => Promise<String>;
@@ -1150,6 +1192,8 @@ export interface MovieListPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   title: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  splitData: () => Promise<AsyncIterator<String>>;
   alternativeTitle: () => Promise<AsyncIterator<String>>;
   extent: () => Promise<AsyncIterator<String>>;
   language: () => Promise<AsyncIterator<String>>;
@@ -1188,6 +1232,8 @@ export interface MovieListSubscriptionPayloadSubscription
 export interface MovieList {
   id: ID_Output;
   title: String;
+  description?: String;
+  splitData?: String;
   alternativeTitle?: String;
   extent?: String;
   language?: String;
@@ -1201,6 +1247,8 @@ export interface MovieList {
 export interface MovieListPromise extends Promise<MovieList>, Fragmentable {
   id: () => Promise<ID_Output>;
   title: () => Promise<String>;
+  description: () => Promise<String>;
+  splitData: () => Promise<String>;
   alternativeTitle: () => Promise<String>;
   extent: () => Promise<String>;
   language: () => Promise<String>;
@@ -1216,6 +1264,8 @@ export interface MovieListSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   title: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  splitData: () => Promise<AsyncIterator<String>>;
   alternativeTitle: () => Promise<AsyncIterator<String>>;
   extent: () => Promise<AsyncIterator<String>>;
   language: () => Promise<AsyncIterator<String>>;
@@ -1231,6 +1281,8 @@ export interface MovieListNullablePromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   title: () => Promise<String>;
+  description: () => Promise<String>;
+  splitData: () => Promise<String>;
   alternativeTitle: () => Promise<String>;
   extent: () => Promise<String>;
   language: () => Promise<String>;
