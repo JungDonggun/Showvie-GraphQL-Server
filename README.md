@@ -1,2 +1,2 @@
-# Showvie-API-Server
-Showvie API Server 
+# Showvie-GraphQL-Server
+Showvie GraphQL Server 
