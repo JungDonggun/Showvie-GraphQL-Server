@@ -29,7 +29,7 @@ export const typeDefs = gql`
 	}
 
 	type Query {
-		movieList(genreAlt: String!, startIndex: Int, lastIndex: Int): [Movies!]!
+		movieList(subjectCategory: String!, offset: Int, limit: Int): [Movies!]!
 	}
 
 	type Mutation {

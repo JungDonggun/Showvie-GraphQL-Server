@@ -5,19 +5,24 @@ import { get } from 'config'
 // Resolver란, query에서 특정 필드에 대한 요청이 있을 때, 그것을 어떤 로직으로 처리할지 GraphQL에게 알려주는 역할을 합니다.
 const resolvers = {
 	Query: {
-		movieList: async (parent, { genreAlt, startIndex, lastIndex }, context, info) => {
+		movieList: async (parent, { subjectCategory, offset, limit }, context, info) => {
 			console.log('Start at movieList', {
-				genreAlt,
-				startIndex,
-				lastIndex
+				subjectCategory,
+				offset,
+				limit
 			})
 
-			const movieList = await context.prisma.movieLists()
-			const filteredMovieList = movieList
-				.filter((word) => word.genreAlt.indexOf(genreAlt) === 0)
-				.splice(startIndex, lastIndex)
+			return await context.prisma.movieLists({
+				where: { subjectCategory_contains: subjectCategory }
+			})
 
-			return filteredMovieList
+			// const movieList = await context.prisma.movieLists()
+
+			// const filteredMovieList = movieList
+			// 	.filter((word) => word.subjectCategory.indexOf(subjectCategory) === 0)
+			// 	.splice(offset, limit)
+
+			// return filteredMovieList
 		}
 	},
 	Mutation: {
