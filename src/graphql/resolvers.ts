@@ -13,16 +13,10 @@ const resolvers = {
 			})
 
 			return await context.prisma.movieLists({
+				skip: offset,
+				last: limit,
 				where: { subjectCategory_contains: subjectCategory }
 			})
-
-			// const movieList = await context.prisma.movieLists()
-
-			// const filteredMovieList = movieList
-			// 	.filter((word) => word.subjectCategory.indexOf(subjectCategory) === 0)
-			// 	.splice(offset, limit)
-
-			// return filteredMovieList
 		}
 	},
 	Mutation: {
