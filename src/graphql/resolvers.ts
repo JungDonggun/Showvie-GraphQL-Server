@@ -13,9 +13,13 @@ const resolvers = {
 			})
 
 			return await context.prisma.movieLists({
+				orderBy: 'regDate_ASC',
 				skip: offset,
 				last: limit,
-				where: { subjectCategory_contains: subjectCategory }
+				where: {
+					referenceIdentifier_not: '',
+					subjectCategory_contains: subjectCategory
+				}
 			})
 		}
 	},
