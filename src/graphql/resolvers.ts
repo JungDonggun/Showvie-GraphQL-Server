@@ -12,7 +12,7 @@ const resolvers = {
 				limit
 			})
 
-			return await context.prisma.movieLists({
+			const movieList = await context.prisma.movieLists({
 				orderBy: 'regDate_ASC',
 				skip: offset,
 				last: limit,
@@ -21,6 +21,12 @@ const resolvers = {
 					subjectCategory_contains: subjectCategory
 				}
 			})
+
+			return {
+				offset,
+				limit,
+				movieList
+			}
 		}
 	},
 	Mutation: {
