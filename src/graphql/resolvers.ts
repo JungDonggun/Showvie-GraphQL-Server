@@ -38,6 +38,8 @@ const resolvers = {
         login: async (parent, { email, password }, ctx, info) => {
             const user = await ctx.user({ email })
 
+            console.log('email => ', email)
+
             if (!user) {
                 throw new Error('Invalid Login')
             }

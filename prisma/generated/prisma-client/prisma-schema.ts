@@ -656,7 +656,7 @@ type Subscription {
 
 type User {
   id: ID!
-  identity: String!
+  email: String!
   nickname: String!
   password: String!
   createdAt: DateTime!
@@ -672,7 +672,7 @@ type UserConnection {
 
 input UserCreateInput {
   id: ID
-  identity: String!
+  email: String!
   nickname: String!
   password: String!
   movieReviews: MovieReviewCreateManyInput
@@ -686,8 +686,8 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
-  identity_ASC
-  identity_DESC
+  email_ASC
+  email_DESC
   nickname_ASC
   nickname_DESC
   password_ASC
@@ -700,7 +700,7 @@ enum UserOrderByInput {
 
 type UserPreviousValues {
   id: ID!
-  identity: String!
+  email: String!
   nickname: String!
   password: String!
   createdAt: DateTime!
@@ -726,14 +726,14 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateInput {
-  identity: String
+  email: String
   nickname: String
   password: String
   movieReviews: MovieReviewUpdateManyInput
 }
 
 input UserUpdateManyMutationInput {
-  identity: String
+  email: String
   nickname: String
   password: String
 }
@@ -753,20 +753,20 @@ input UserWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
-  identity: String
-  identity_not: String
-  identity_in: [String!]
-  identity_not_in: [String!]
-  identity_lt: String
-  identity_lte: String
-  identity_gt: String
-  identity_gte: String
-  identity_contains: String
-  identity_not_contains: String
-  identity_starts_with: String
-  identity_not_starts_with: String
-  identity_ends_with: String
-  identity_not_ends_with: String
+  email: String
+  email_not: String
+  email_in: [String!]
+  email_not_in: [String!]
+  email_lt: String
+  email_lte: String
+  email_gt: String
+  email_gte: String
+  email_contains: String
+  email_not_contains: String
+  email_starts_with: String
+  email_not_starts_with: String
+  email_ends_with: String
+  email_not_ends_with: String
   nickname: String
   nickname_not: String
   nickname_in: [String!]
@@ -821,6 +821,6 @@ input UserWhereInput {
 
 input UserWhereUniqueInput {
   id: ID
-  identity: String
+  email: String
 }
 `

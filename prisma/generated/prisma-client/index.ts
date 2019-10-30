@@ -226,8 +226,8 @@ export type MovieReviewOrderByInput =
 export type UserOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "identity_ASC"
-  | "identity_DESC"
+  | "email_ASC"
+  | "email_DESC"
   | "nickname_ASC"
   | "nickname_DESC"
   | "password_ASC"
@@ -272,7 +272,7 @@ export interface MovieReviewCreateInput {
 
 export type UserWhereUniqueInput = AtLeastOne<{
   id: Maybe<ID_Input>;
-  identity?: Maybe<String>;
+  email?: Maybe<String>;
 }>;
 
 export interface MovieListWhereInput {
@@ -500,20 +500,20 @@ export interface UserWhereInput {
   id_not_starts_with?: Maybe<ID_Input>;
   id_ends_with?: Maybe<ID_Input>;
   id_not_ends_with?: Maybe<ID_Input>;
-  identity?: Maybe<String>;
-  identity_not?: Maybe<String>;
-  identity_in?: Maybe<String[] | String>;
-  identity_not_in?: Maybe<String[] | String>;
-  identity_lt?: Maybe<String>;
-  identity_lte?: Maybe<String>;
-  identity_gt?: Maybe<String>;
-  identity_gte?: Maybe<String>;
-  identity_contains?: Maybe<String>;
-  identity_not_contains?: Maybe<String>;
-  identity_starts_with?: Maybe<String>;
-  identity_not_starts_with?: Maybe<String>;
-  identity_ends_with?: Maybe<String>;
-  identity_not_ends_with?: Maybe<String>;
+  email?: Maybe<String>;
+  email_not?: Maybe<String>;
+  email_in?: Maybe<String[] | String>;
+  email_not_in?: Maybe<String[] | String>;
+  email_lt?: Maybe<String>;
+  email_lte?: Maybe<String>;
+  email_gt?: Maybe<String>;
+  email_gte?: Maybe<String>;
+  email_contains?: Maybe<String>;
+  email_not_contains?: Maybe<String>;
+  email_starts_with?: Maybe<String>;
+  email_not_starts_with?: Maybe<String>;
+  email_ends_with?: Maybe<String>;
+  email_not_ends_with?: Maybe<String>;
   nickname?: Maybe<String>;
   nickname_not?: Maybe<String>;
   nickname_in?: Maybe<String[] | String>;
@@ -567,13 +567,13 @@ export interface UserWhereInput {
 }
 
 export interface UserUpdateManyMutationInput {
-  identity?: Maybe<String>;
+  email?: Maybe<String>;
   nickname?: Maybe<String>;
   password?: Maybe<String>;
 }
 
 export interface UserUpdateInput {
-  identity?: Maybe<String>;
+  email?: Maybe<String>;
   nickname?: Maybe<String>;
   password?: Maybe<String>;
   movieReviews?: Maybe<MovieReviewUpdateManyInput>;
@@ -662,7 +662,7 @@ export interface MovieReviewWhereInput {
 
 export interface UserCreateInput {
   id?: Maybe<ID_Input>;
-  identity: String;
+  email: String;
   nickname: String;
   password: String;
   movieReviews?: Maybe<MovieReviewCreateManyInput>;
@@ -893,7 +893,7 @@ export interface MovieReviewNullablePromise
 
 export interface UserPreviousValues {
   id: ID_Output;
-  identity: String;
+  email: String;
   nickname: String;
   password: String;
   createdAt: DateTimeOutput;
@@ -904,7 +904,7 @@ export interface UserPreviousValuesPromise
   extends Promise<UserPreviousValues>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  identity: () => Promise<String>;
+  email: () => Promise<String>;
   nickname: () => Promise<String>;
   password: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
@@ -915,7 +915,7 @@ export interface UserPreviousValuesSubscription
   extends Promise<AsyncIterator<UserPreviousValues>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  identity: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
   nickname: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -1071,7 +1071,7 @@ export interface MovieListEdgeSubscription
 
 export interface User {
   id: ID_Output;
-  identity: String;
+  email: String;
   nickname: String;
   password: String;
   createdAt: DateTimeOutput;
@@ -1080,7 +1080,7 @@ export interface User {
 
 export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
-  identity: () => Promise<String>;
+  email: () => Promise<String>;
   nickname: () => Promise<String>;
   password: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
@@ -1100,7 +1100,7 @@ export interface UserSubscription
   extends Promise<AsyncIterator<User>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  identity: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
   nickname: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
   createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
@@ -1120,7 +1120,7 @@ export interface UserNullablePromise
   extends Promise<User | null>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  identity: () => Promise<String>;
+  email: () => Promise<String>;
   nickname: () => Promise<String>;
   password: () => Promise<String>;
   createdAt: () => Promise<DateTimeOutput>;
