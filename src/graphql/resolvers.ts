@@ -36,15 +36,15 @@ const resolvers = {
             return user
         },
         login: async (parent, { email, password }, ctx, info) => {
-            const user = await ctx.user({ email })
-
-            console.log('email => ', email)
+            const user = await ctx.prisma.users({ where: { email }})
 
             if (!user) {
                 throw new Error('Invalid Login')
             }
 
-            const passwordWatch = await compare(password, user.password)
+            console.log('user.password =>', user[0].password)
+
+            const passwordWatch = await compare(password, user[0].password)
 
             if (!passwordWatch) {
                 throw new Error('Invalid Login')
@@ -54,14 +54,16 @@ const resolvers = {
 
             const token = sign(
                 {
-                    email: user.email,
-                    nickname: user.nickname
+                    email: user[0].email,
+                    nickname: user[0].nickname
                 },
                 secret,
                 {
-                    expires: '1m'
+                    expires: '1h'
                 }
             )
+
+            console.log('token', token)
 
             return {
                 token,
