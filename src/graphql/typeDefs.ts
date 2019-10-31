@@ -30,6 +30,7 @@ export const typeDefs = gql`
 
     type Query {
         movieList(subjectCategory: String!, offset: Int, limit: Int): [Movies!]!
+        currentUser: User!
     }
 
     type Mutation {
@@ -42,4 +43,5 @@ export const typeDefs = gql`
         user: User!
     }
 `
+
 export default typeDefs
