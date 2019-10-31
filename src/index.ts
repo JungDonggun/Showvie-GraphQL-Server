@@ -24,6 +24,11 @@ const server = new ApolloServer({
 		const token = tokenWithBearer.split(' ')[1]
 		const user = getUser(token)
 
+		console.log({
+			tokenWithBearer,
+			user
+		})
+
 		return { user, prisma }
 	}
 })
