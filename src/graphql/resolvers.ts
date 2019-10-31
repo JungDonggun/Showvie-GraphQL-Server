@@ -59,7 +59,7 @@ const resolvers = {
                 },
                 secret,
                 {
-                    expires: '1h'
+                    expiresIn: '1h'
                 }
             )
 
