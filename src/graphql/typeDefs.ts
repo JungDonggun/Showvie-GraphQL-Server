@@ -27,6 +27,10 @@ export const typeDefs = gql`
         nickname: String!
         movieReviews: [MovieReview]
     }
+    
+    type Token {
+        token: String!
+    }
 
     type Query {
         movieList(subjectCategory: String!, offset: Int, limit: Int): [Movies!]!
@@ -35,7 +39,7 @@ export const typeDefs = gql`
 
     type Mutation {
         register(nickname: String!, email: String!, password: String!): User!
-        login(email: String!, password: String!): LoginResponse!
+        login(email: String!, password: String!): Token!
     }
 
     type LoginResponse {
