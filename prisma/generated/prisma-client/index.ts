@@ -280,7 +280,9 @@ export type movieTagOrderByInput =
   | "id_ASC"
   | "id_DESC"
   | "tags_ASC"
-  | "tags_DESC";
+  | "tags_DESC"
+  | "madeBy_ASC"
+  | "madeBy_DESC";
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
@@ -428,6 +430,7 @@ export type movieTagWhereUniqueInput = AtLeastOne<{
 
 export interface movieTagUpdateManyMutationInput {
   tags?: Maybe<String>;
+  madeBy?: Maybe<String>;
 }
 
 export interface MovieReviewUpdateWithWhereUniqueNestedInput {
@@ -632,6 +635,20 @@ export interface movieTagWhereInput {
   tags_not_starts_with?: Maybe<String>;
   tags_ends_with?: Maybe<String>;
   tags_not_ends_with?: Maybe<String>;
+  madeBy?: Maybe<String>;
+  madeBy_not?: Maybe<String>;
+  madeBy_in?: Maybe<String[] | String>;
+  madeBy_not_in?: Maybe<String[] | String>;
+  madeBy_lt?: Maybe<String>;
+  madeBy_lte?: Maybe<String>;
+  madeBy_gt?: Maybe<String>;
+  madeBy_gte?: Maybe<String>;
+  madeBy_contains?: Maybe<String>;
+  madeBy_not_contains?: Maybe<String>;
+  madeBy_starts_with?: Maybe<String>;
+  madeBy_not_starts_with?: Maybe<String>;
+  madeBy_ends_with?: Maybe<String>;
+  madeBy_not_ends_with?: Maybe<String>;
   AND?: Maybe<movieTagWhereInput[] | movieTagWhereInput>;
   OR?: Maybe<movieTagWhereInput[] | movieTagWhereInput>;
   NOT?: Maybe<movieTagWhereInput[] | movieTagWhereInput>;
@@ -640,6 +657,7 @@ export interface movieTagWhereInput {
 export interface movieTagCreateInput {
   id?: Maybe<ID_Input>;
   tags: String;
+  madeBy: String;
 }
 
 export interface MovieReviewUpdateManyInput {
@@ -940,6 +958,7 @@ export interface MovieReviewUpdateManyDataInput {
 
 export interface movieTagUpdateInput {
   tags?: Maybe<String>;
+  madeBy?: Maybe<String>;
 }
 
 export interface NodeNode {
@@ -965,6 +984,7 @@ export interface BatchPayloadSubscription
 export interface movieTagPreviousValues {
   id: ID_Output;
   tags: String;
+  madeBy: String;
 }
 
 export interface movieTagPreviousValuesPromise
@@ -972,6 +992,7 @@ export interface movieTagPreviousValuesPromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   tags: () => Promise<String>;
+  madeBy: () => Promise<String>;
 }
 
 export interface movieTagPreviousValuesSubscription
@@ -979,6 +1000,7 @@ export interface movieTagPreviousValuesSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   tags: () => Promise<AsyncIterator<String>>;
+  madeBy: () => Promise<AsyncIterator<String>>;
 }
 
 export interface AggregateMovieReview {
@@ -1179,11 +1201,13 @@ export interface AggregateMovieListSubscription
 export interface movieTag {
   id: ID_Output;
   tags: String;
+  madeBy: String;
 }
 
 export interface movieTagPromise extends Promise<movieTag>, Fragmentable {
   id: () => Promise<ID_Output>;
   tags: () => Promise<String>;
+  madeBy: () => Promise<String>;
 }
 
 export interface movieTagSubscription
@@ -1191,6 +1215,7 @@ export interface movieTagSubscription
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
   tags: () => Promise<AsyncIterator<String>>;
+  madeBy: () => Promise<AsyncIterator<String>>;
 }
 
 export interface movieTagNullablePromise
@@ -1198,6 +1223,7 @@ export interface movieTagNullablePromise
     Fragmentable {
   id: () => Promise<ID_Output>;
   tags: () => Promise<String>;
+  madeBy: () => Promise<String>;
 }
 
 export interface MovieList {

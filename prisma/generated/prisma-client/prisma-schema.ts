@@ -604,6 +604,7 @@ input MovieReviewWhereUniqueInput {
 type movieTag {
   id: ID!
   tags: String!
+  madeBy: String!
 }
 
 type movieTagConnection {
@@ -615,6 +616,7 @@ type movieTagConnection {
 input movieTagCreateInput {
   id: ID
   tags: String!
+  madeBy: String!
 }
 
 type movieTagEdge {
@@ -627,11 +629,14 @@ enum movieTagOrderByInput {
   id_DESC
   tags_ASC
   tags_DESC
+  madeBy_ASC
+  madeBy_DESC
 }
 
 type movieTagPreviousValues {
   id: ID!
   tags: String!
+  madeBy: String!
 }
 
 type movieTagSubscriptionPayload {
@@ -654,10 +659,12 @@ input movieTagSubscriptionWhereInput {
 
 input movieTagUpdateInput {
   tags: String
+  madeBy: String
 }
 
 input movieTagUpdateManyMutationInput {
   tags: String
+  madeBy: String
 }
 
 input movieTagWhereInput {
@@ -689,6 +696,20 @@ input movieTagWhereInput {
   tags_not_starts_with: String
   tags_ends_with: String
   tags_not_ends_with: String
+  madeBy: String
+  madeBy_not: String
+  madeBy_in: [String!]
+  madeBy_not_in: [String!]
+  madeBy_lt: String
+  madeBy_lte: String
+  madeBy_gt: String
+  madeBy_gte: String
+  madeBy_contains: String
+  madeBy_not_contains: String
+  madeBy_starts_with: String
+  madeBy_not_starts_with: String
+  madeBy_ends_with: String
+  madeBy_not_ends_with: String
   AND: [movieTagWhereInput!]
   OR: [movieTagWhereInput!]
   NOT: [movieTagWhereInput!]

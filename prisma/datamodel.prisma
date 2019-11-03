@@ -35,4 +35,5 @@ type MovieList {
 type movieTag {
     id: ID! @id
     tags: String!
+    madeBy: String!
 }

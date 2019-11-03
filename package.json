@@ -9,7 +9,7 @@
 		"dev": "nodemon src/index.ts",
 		"build": "tsc -p .",
 		"movieParser": "nodemon movieParser/index.ts",
-		"seed_prisma": "nodemon prisma/seed.ts"
+		"make_seed": "nodemon prisma/seed.ts"
 	},
 	"dependencies": {
 		"apollo-server": "^2.9.5",

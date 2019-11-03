@@ -26,9 +26,10 @@ const resolvers = {
       return getMovieList
     },
     getMovieTags: async (parent, args, context, info) => {
-      const getMovieTag = await context.prisma.movieTag
+      const getMovieTag = await context.prisma.movieTag({ madeBy: 'admin' })
 
 
+      return getMovieTag
     }
   },
   Mutation: {

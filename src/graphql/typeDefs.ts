@@ -50,6 +50,7 @@ export const typeDefs = gql`
     
     type MovieTag {
         tags: String!
+        madeBy: String!
     }
 `
 
