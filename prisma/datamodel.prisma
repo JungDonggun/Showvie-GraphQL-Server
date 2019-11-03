@@ -31,3 +31,8 @@ type MovieList {
   rights: String
   subjectCategory: String
 }
+
+type movieTag {
+    id: ID! @id
+    tags: String!
+}

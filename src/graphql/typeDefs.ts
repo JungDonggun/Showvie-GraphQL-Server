@@ -35,6 +35,7 @@ export const typeDefs = gql`
     type Query {
         movieList(subjectCategory: String!, offset: Int, limit: Int): [Movies!]!
         currentUser: User!
+        getMovieTags: MovieTag!
     }
 
     type Mutation {
@@ -45,6 +46,10 @@ export const typeDefs = gql`
     type LoginResponse {
         token: String!
         user: User!
+    }
+    
+    type MovieTag {
+        tags: String!
     }
 `
 

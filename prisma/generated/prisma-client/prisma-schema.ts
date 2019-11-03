@@ -10,6 +10,10 @@ type AggregateMovieReview {
   count: Int!
 }
 
+type AggregatemovieTag {
+  count: Int!
+}
+
 type AggregateUser {
   count: Int!
 }
@@ -597,6 +601,103 @@ input MovieReviewWhereUniqueInput {
   id: ID
 }
 
+type movieTag {
+  id: ID!
+  tags: String!
+}
+
+type movieTagConnection {
+  pageInfo: PageInfo!
+  edges: [movieTagEdge]!
+  aggregate: AggregatemovieTag!
+}
+
+input movieTagCreateInput {
+  id: ID
+  tags: String!
+}
+
+type movieTagEdge {
+  node: movieTag!
+  cursor: String!
+}
+
+enum movieTagOrderByInput {
+  id_ASC
+  id_DESC
+  tags_ASC
+  tags_DESC
+}
+
+type movieTagPreviousValues {
+  id: ID!
+  tags: String!
+}
+
+type movieTagSubscriptionPayload {
+  mutation: MutationType!
+  node: movieTag
+  updatedFields: [String!]
+  previousValues: movieTagPreviousValues
+}
+
+input movieTagSubscriptionWhereInput {
+  mutation_in: [MutationType!]
+  updatedFields_contains: String
+  updatedFields_contains_every: [String!]
+  updatedFields_contains_some: [String!]
+  node: movieTagWhereInput
+  AND: [movieTagSubscriptionWhereInput!]
+  OR: [movieTagSubscriptionWhereInput!]
+  NOT: [movieTagSubscriptionWhereInput!]
+}
+
+input movieTagUpdateInput {
+  tags: String
+}
+
+input movieTagUpdateManyMutationInput {
+  tags: String
+}
+
+input movieTagWhereInput {
+  id: ID
+  id_not: ID
+  id_in: [ID!]
+  id_not_in: [ID!]
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_contains: ID
+  id_not_contains: ID
+  id_starts_with: ID
+  id_not_starts_with: ID
+  id_ends_with: ID
+  id_not_ends_with: ID
+  tags: String
+  tags_not: String
+  tags_in: [String!]
+  tags_not_in: [String!]
+  tags_lt: String
+  tags_lte: String
+  tags_gt: String
+  tags_gte: String
+  tags_contains: String
+  tags_not_contains: String
+  tags_starts_with: String
+  tags_not_starts_with: String
+  tags_ends_with: String
+  tags_not_ends_with: String
+  AND: [movieTagWhereInput!]
+  OR: [movieTagWhereInput!]
+  NOT: [movieTagWhereInput!]
+}
+
+input movieTagWhereUniqueInput {
+  id: ID
+}
+
 type Mutation {
   createMovieList(data: MovieListCreateInput!): MovieList!
   updateMovieList(data: MovieListUpdateInput!, where: MovieListWhereUniqueInput!): MovieList
@@ -616,6 +717,12 @@ type Mutation {
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   deleteUser(where: UserWhereUniqueInput!): User
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  createmovieTag(data: movieTagCreateInput!): movieTag!
+  updatemovieTag(data: movieTagUpdateInput!, where: movieTagWhereUniqueInput!): movieTag
+  updateManymovieTags(data: movieTagUpdateManyMutationInput!, where: movieTagWhereInput): BatchPayload!
+  upsertmovieTag(where: movieTagWhereUniqueInput!, create: movieTagCreateInput!, update: movieTagUpdateInput!): movieTag!
+  deletemovieTag(where: movieTagWhereUniqueInput!): movieTag
+  deleteManymovieTags(where: movieTagWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -645,6 +752,9 @@ type Query {
   user(where: UserWhereUniqueInput!): User
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  movieTag(where: movieTagWhereUniqueInput!): movieTag
+  movieTags(where: movieTagWhereInput, orderBy: movieTagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [movieTag]!
+  movieTagsConnection(where: movieTagWhereInput, orderBy: movieTagOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): movieTagConnection!
   node(id: ID!): Node
 }
 
@@ -652,6 +762,7 @@ type Subscription {
   movieList(where: MovieListSubscriptionWhereInput): MovieListSubscriptionPayload
   movieReview(where: MovieReviewSubscriptionWhereInput): MovieReviewSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  movieTag(where: movieTagSubscriptionWhereInput): movieTagSubscriptionPayload
 }
 
 type User {
